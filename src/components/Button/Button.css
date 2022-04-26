@@ -1,0 +1,73 @@
+:root {
+	--bg: rgb(31, 32, 40);
+	--bg--10: rgb(31, 32, 40, 0.1);
+	--bg--light: rgb(75, 78, 100, 0.2);
+	--accent: #fab601;
+	--accent--filter: invert(68%) sepia(69%) saturate(1418%) hue-rotate(360deg) brightness(102%) contrast(99%);
+	--pink: rgb(194, 128, 210);
+}
+button.btn{
+	background-color: rgba(255, 255, 255, 0.10);
+	outline: 0px solid var(--accent);
+	border: none;
+	color: rgb(234, 234, 234);
+	padding: 10px 15px;
+	margin: 0%;
+	border-radius: 10px;
+	transition: all 0s;
+	cursor: pointer;
+}
+button.btn:focus,
+button.btn:hover {
+	transition: 0s;
+	outline: 2px solid var(--accent);
+}
+button.btn--primary{
+	background-color: var(--accent);
+	outline: 0px solid var(--accent);
+	border: none;
+	color: rgb(234, 234, 234);
+	padding: 10px 15px;
+	margin: 1%;
+	border-radius: 20px;
+	transition: all 0s;
+}
+.btn--primary:hover{
+	background-color: var(--accent80);
+}
+button.btn--secondary{
+	background-color: rgba(255, 255, 255, 0);
+	color: var(--accent);
+	border: 1px solid var(--accent);
+	width: fit-content;
+	padding: 10px 10px;
+}
+button.btn--tertiary{
+	background-color: rgba(255, 255, 255, 0.0);
+	outline: 0px solid var(--accent);
+	border: none;
+	color: rgb(234, 234, 234);
+	padding: 15px 15px;
+	margin: 1%;
+	border-radius: 5px;
+	transition: all 0s;
+	color: rgb(39, 205, 255);
+}
+button.btn--tertiary.disabled{
+	color: rgb(153, 153, 153);
+}
+button.btn--tertiary.disabled:hover {
+	text-decoration: none;
+	outline: none;
+	border: none;
+}
+button.btn--tertiary:hover{
+	text-decoration: underline;
+	outline: none;
+	border: none;
+}
+button.btn--tertiary:focus,
+button.btn--tertiary:hover{
+	outline: none;
+	border: none;
+}

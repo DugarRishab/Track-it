@@ -1,11 +1,18 @@
+import { BrowserRouter as Router } from "react-router-dom";
 
 import "./App.css";
+import Menu from "./components/Menu/Menu";
+import Navbar from "./components/Navbar/Navbar";
 
-function App() {
+const App = () => {
 	return (
-		<div className="App">
-			
-		</div>
+		<Router>
+			<Navbar></Navbar>
+			<div className="main-container">
+				<Menu></Menu>
+				<div className="main-body"></div>
+			</div>
+		</Router>
 	);
 }
 
