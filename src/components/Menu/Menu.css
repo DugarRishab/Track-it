@@ -1,0 +1,26 @@
+.menu-container{
+	border: 0px solid red;
+	width: 80px;
+	height: calc(100vh - 80px);
+	padding: 10px 0px 0 15px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	box-sizing: border-box;
+}
+.menu-items{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin-top: 50px;
+}
+.menu-item{
+	border: 0px solid red;
+	padding: 10px;
+}
+.menu-item.active span{
+	color: white;
+}

@@ -39,7 +39,7 @@ const Navbar = () => {
 					className="nav-item noti"
 				>
 					<span
-						className={`material-icons-two-tone ${
+						className={`material-icons-round dimmed ${
 							notifications > 0 ? "active" : null
 						}`}
 						width="18"
@@ -68,7 +68,7 @@ const Navbar = () => {
 							<p className="status">Have a nice day 👋</p>
 						</div>
 					</div>
-					<span class="material-icons-two-tone dimmed">settings</span>
+					<span class="material-icons-round dimmed dimmed">settings</span>
 				</div>
 			</div>
 		</nav>
