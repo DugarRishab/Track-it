@@ -1,0 +1,12 @@
+div.not-found-page{
+	width: 100%;
+	margin: auto;
+	border: 0px solid red;
+	display: flex;
+	margin-top: 50px;
+}
+img.not-found{
+	width: 50%;
+	margin: auto;
+	border-radius: 100px;
+}
