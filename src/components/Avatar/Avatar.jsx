@@ -4,7 +4,7 @@ import './Avatar.css';
 class Avatar extends Component {
 	state = {  } 
 	render() { 
-		const { size } = this.props;
+		const { size, color } = this.props;
 		const { img, name } = this.props.user;
 		const style = {
 			height: `${size}px`,
@@ -14,7 +14,7 @@ class Avatar extends Component {
 			fontSize: size*0.5
 		}
 		return (
-			<div className="avatar" style={style}>
+			<div className={`avatar ${color}`} style={style}>
 				{img ? (
 					<img src={img} alt="" />
 				) : (

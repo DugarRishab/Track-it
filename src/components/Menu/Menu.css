@@ -1,8 +1,8 @@
 .menu-container{
-	border: 0px solid red;
-	width: 80px;
+	border: 1px solid red;
+	width: 100px;
 	height: calc(100vh - 80px);
-	padding: 10px 0px 0 15px;
+	padding: 10px 0px 0 0px;
 
 	display: flex;
 	flex-direction: column;
