@@ -6,6 +6,19 @@ import "./TaskCard.css";
 
 const TaskCard = (props) => {
 	const { task } = props;
+	const taskStatus = () => {
+		switch (task.status) {
+			case "in-progress":
+				return <p className="status">{task.progress + "%"}</p>;
+			case "done":
+				return <p className="status correct">{"done"}</p>;
+			case "due":
+				if (task.dueDate) return <p className="status error">{"due"}</p>;
+				else return null;
+			default:
+				return null;
+		}
+	}
 	return (
 		<div className="task-card-container">
 			<header>
@@ -22,15 +35,16 @@ const TaskCard = (props) => {
 					<span class="material-icons-round">date_range</span>
 					{task.dueDate ? task.dueDate : "-"}
 				</p>
-				<p className="status">
+				{/* <p className="status">
 					{task.status === "in-progress"
-						? task.progress
+						? task.progress + "%"
 						: task.status === "done"
 						? task.status
 						: task.dueDate
 						? task.status
 						: null}
-				</p>
+				</p> */}
+				{taskStatus()}
 			</div>
 			<div className="assigned-to">
 				<div className="avatars">
@@ -43,7 +57,7 @@ const TaskCard = (props) => {
 					) : null}
 				</div>
 
-				{`+ ${task.assignedTo.length - 3} others`}
+				{ task.assignedTo.length > 3 ? `+ ${task.assignedTo.length - 3} others` : null}
 			</div>
 		</div>
 	);

@@ -38,7 +38,7 @@
 	margin-top: 5px;
 }
 .task-card-container .title{
-	margin: 5px 0px;
+	margin: 10px 0px;
 	font-size: 18px;
 }
 .task-card-container .description {
@@ -67,6 +67,13 @@
 }
 .task-card-container .info .status{
 	font-size: 12px;
+	color: var(--pink);
+}
+.task-card-container .info .status.correct{
+	color: var(--green);
+}
+.task-card-container .info .status.error{
+	color: var(--accent);
 }
 .task-card-container .assigned-to{
 	display: flex;
@@ -85,9 +92,12 @@
 }
 .task-card-container .assigned-to .avatars .avatar:nth-child(2){
 	margin-left: -10px;
-	box-shadow: -5px 5px 5px 0 rgba(0, 0, 0, 0.255);
+	box-shadow: -5px 0px 10px 0 rgba(0, 0, 0, 0.2);
 }
 .task-card-container .assigned-to .avatars .avatar:nth-child(3) {
 	margin-left: -10px;
-	box-shadow: -5px 5px 5px 0 rgba(0, 0, 0, 0.255);
+	box-shadow: -5px 0px 10px 0 rgba(0, 0, 0, 0.2);
+}
+.task-card-container .progressbar-container{
+	margin: 10px 0;
 }

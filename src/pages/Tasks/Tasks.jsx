@@ -121,7 +121,7 @@ const Tasks = () => {
 			tag: ["Dribble"],
 			title: "Make designs",
 			description: "I wan to make a cool profile photo for Instagram",
-			dueDate: "",
+			dueDate: "12th March 2022",
 			assignedTo: [
 				{
 					name: "Rishab Dugar",
@@ -161,7 +161,7 @@ const Tasks = () => {
 			status: "in-progress",
 			team: "Enver Studio",
 			img: "",
-			progress: "70%",
+			progress: 70,
 		},
 	];
 	const doneTasks = [
@@ -252,11 +252,11 @@ const Tasks = () => {
 						<header>Category Tasks</header>
 						<div className="body">
 							<InfoCard
-								title="Assigned by you"
+								title="Assigned by me"
 								number="2"
 							></InfoCard>
 							<InfoCard
-								title="Assigned to you"
+								title="Assigned to me"
 								number="10"
 							></InfoCard>
 						</div>

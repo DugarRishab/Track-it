@@ -12,7 +12,7 @@
 
 .progressbar-container {
 	border: 0px solid red;
-	width: 90%;
+	width: 100%;
 	height: 20px;
 	display: flex;
 	flex-direction: row;
@@ -24,10 +24,12 @@
 	height: 5px;
 	width: 100%;
 	background-color: var(--pink--faded);
+	border-radius: 25px;
 }
 .progress{
 	background-color: var(--pink);
 	height: 5px;
+	border-radius: 25px;
 	/* width: 40%; */
 }
 .progress-btn{
@@ -39,4 +41,5 @@
 	/* left: 40%; */
 	top: 50%;
 	transform: translateY(-50%);
+	box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.263);
 }
