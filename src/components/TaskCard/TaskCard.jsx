@@ -16,7 +16,7 @@ const TaskCard = (props) => {
 			{task.team ? <p className="team-name">{task.team}</p> : null}
 			<div className="title">{task.title}</div>
 			<div className="description">{task.description}</div>
-			{task.progress ? <ProgressBar></ProgressBar> : null}
+			{task.status === "in-progress" ? <ProgressBar progress={task.progress}></ProgressBar> : null}
 			<div className="info">
 				<p className="date">
 					<span class="material-icons-round">date_range</span>

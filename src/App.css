@@ -38,4 +38,6 @@
 	border: 0px solid greenyellow;
 	width: calc(100% - 100px);
 	min-height: calc(100vh - 80px);
+	position: relative;
+	margin-left: 100px;
 }

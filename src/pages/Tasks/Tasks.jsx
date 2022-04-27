@@ -39,7 +39,7 @@ const Tasks = () => {
 			status: "due",
 			team: "",
 			img: "",
-			progress: "0%",
+			progress: 0,
 		},
 		{
 			tag: ["Sharing"],
@@ -67,7 +67,7 @@ const Tasks = () => {
 			status: "in-progress",
 			team: "Enver Studio",
 			img: "",
-			progress: "70%",
+			progress: 70,
 		},
 		{
 			tag: ["Dribble"],
@@ -96,7 +96,7 @@ const Tasks = () => {
 			status: "done",
 			team: "Enver Studio",
 			img: "",
-			progress: "100%",
+			progress: 100,
 		},
 	];
 	const BacklogTasks = [
@@ -294,6 +294,9 @@ const Tasks = () => {
 								color="yellow"
 								type="secondary"
 							></Tag>
+							{BacklogTasks.map((task) => (
+								<TaskCard task={task}></TaskCard>
+							))}
 						</div>
 						<div className="panel">
 							<Tag
@@ -312,6 +315,9 @@ const Tasks = () => {
 								color="pink"
 								type="secondary"
 							></Tag>
+							{inProgressTasks.map((task) => (
+								<TaskCard task={task}></TaskCard>
+							))}
 						</div>
 						<div className="panel">
 							<Tag
@@ -330,11 +336,9 @@ const Tasks = () => {
 								color="green"
 								type="secondary"
 							></Tag>
-							{
-								doneTasks.map(task => (
-									<TaskCard task={task}></TaskCard>
-								))
-							}
+							{doneTasks.map((task) => (
+								<TaskCard task={task}></TaskCard>
+							))}
 						</div>
 					</div>
 				</section>
@@ -346,7 +350,10 @@ const Tasks = () => {
 					<RightCarousel></RightCarousel>
 				</section>
 
-				<section></section>
+				<section>
+					<div className="title">Recent Activities</div>
+					
+				</section>
 			</div>
 		</div>
 	);

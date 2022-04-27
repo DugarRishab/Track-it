@@ -209,7 +209,7 @@
 	justify-content: center;
 	align-items: flex-start;
 	padding: 20px 0px 20px 20px;
-	border: 1px solid red;
+	border: 0px solid red;
 	width: 100%;
 }
 .task-page .left-panel section.all-tasks header .text .title{
@@ -233,8 +233,8 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
-	border: 1px solid red;
+	align-items: flex-start;
+	border: 0px solid red;
 	width: calc(100% - 0px);
 	padding: 20px;
 	margin-top: 20px;
@@ -242,15 +242,18 @@
 	background-color: var(--bg--light);
 }
 .task-page .left-panel section.all-tasks .contents .panel{
-	border: 1px solid greenyellow;
+	border: 0px solid greenyellow;
 	width: 32%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 	border-radius: 20px;
-	background-color: var(--bg);
+	/* background-color: var(--bg); */
 	padding: 10px;
+}
+.task-page .left-panel section.all-tasks .contents .panel .tag{
+	background-color: var(--bg);
 }
 
 .task-page .right-panel{
@@ -261,6 +264,15 @@
 	justify-content: flex-start;
 	overflow-x: hidden;
 	border: 0px solid red;
+}
+.task-page .right-panel section{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	border: 1px solid red;
+	width: 100%;
+	margin-bottom: 20px;
 }
 .task-page .right-panel section header{
 	margin-bottom: 20px;
