@@ -5,6 +5,7 @@
 :root {
 	--bg: rgb(31, 32, 40);
 	--bg--10:rgb(31, 32, 40, 0.1);
+	--bg--60: rgb(31, 32, 40, 0.6);
 	--bg--light: rgb(75, 78, 100, 0.2);
 	--accent: #fab601;
 	--accent--filter:  invert(68%) sepia(69%) saturate(1418%) hue-rotate(360deg) brightness(102%) contrast(99%);
@@ -15,7 +16,8 @@ nav.navbar-container{
 	margin: 0 auto;
 	border: 0px solid red;
 	/* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); */
-	/* background-color: rgba(248, 249, 249, 0.05); */
+	background-color: var(--bg--10);
+	background-color: var(--bg--60);
 	backdrop-filter: blur(40px);
 
 	position: fixed;
