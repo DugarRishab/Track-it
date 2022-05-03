@@ -44,7 +44,6 @@
 	flex-direction: row;
 	transition: 0.5s all;
 	overflow: hidden;
-	
 }
 .main-body-container{
 	width: 100%;
@@ -61,5 +60,6 @@
 	.main-body{
 		margin-left: 0;
 		width: 100%;
+		min-width: 100%;
 	}
 }

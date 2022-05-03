@@ -227,6 +227,12 @@
 	border: 0px solid red;
 	width: 100%;
 }
+.task-page .left-panel section.all-tasks header {
+	width: 100%;
+}
+.task-page .left-panel section.all-tasks header .text{
+	width: 100%;
+}
 .task-page .left-panel section.all-tasks header .text .title{
 	font-size: 40px;
 	font-weight: 600;
