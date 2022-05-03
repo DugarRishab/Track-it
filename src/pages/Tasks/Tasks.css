@@ -16,6 +16,7 @@
 	background-color: var(--bg--light);
 	color: rgb(150, 150, 150);
 	transition: 0.25s all;
+	width: fit-content !important;
 }
 .info-card:hover{
 	color: white;
@@ -35,6 +36,7 @@
 .info-card .title{
 	font-size: 15px;
 	margin: 0 0 15px 0;
+	white-space: nowrap;
 }
 .info-card .contents{
 	display: flex;
@@ -68,6 +70,7 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	width: 320px;
+	width: 90%;
 	overflow: hidden;
 	border: 0px solid blue;
 	border-radius: 25px;
@@ -83,15 +86,18 @@
 	/* margin-left: -000px; */
 	transition: 0.5s all;
 	border-radius: 25px;
+	width: 100%;
 }
 .carousel .slides .item{
 	width: 320px;
+	min-width: 100%;
 	height: 350px;
 	border: 0px solid green;
 	border-radius: 25px 25px 0 0;
 }
 .carousel .slides .item img{
 	width: 320px;
+	width: 100%;
 	height: 220px;
 	object-fit: cover;
 	object-position: top;
@@ -105,11 +111,13 @@
 	align-items: center;
 	border: 0px solid yellow;
 	height: 120px;
+	padding: 10px;
 }
 .carousel .slides .item .content .title{
 	font-size: 30px;
 	text-align: center;
 	line-height: 32px;
+	margin-top: 10px;
 }
 .carousel .slides .item .content .sub-text{
 	font-size: 12px;
@@ -125,6 +133,7 @@
 	justify-content: space-between;
 	width: 100%;
 	padding: 20px 20px;
+	border: 0px solid yellow;
 }
 .carousel .carousel-controls .viewers{
 	display: flex;
@@ -162,16 +171,20 @@
 
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: flex-start;
+	max-width: 100%;
 }
 .task-page .left-panel{
 	border: 0px solid greenyellow;
 	width: calc(100% - 380px);
+	width: 70%;
 	display: flex;
+	flex-grow: 1;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	margin-right: 30px;
 }
 .task-page .left-panel section.header{
 	display: flex;
@@ -185,6 +198,7 @@
 	justify-content: center;
 	align-items: flex-start;
 	padding: 20px;
+	flex-shrink: 1;
 }
 .task-page .left-panel section.header .item .body{
 	display: flex;
@@ -195,6 +209,7 @@
 }
 .task-page .left-panel section.header .item .body .info-card{
 	margin: 0 10px;
+	
 }
 .task-page .left-panel section.header .item:nth-child(1) .body .info-card{
 	box-shadow: inset -5px 0 5px rgba(255, 255, 255, 0.2),
@@ -258,12 +273,14 @@
 
 .task-page .right-panel{
 	width: 350px;
+	width: 25%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
 	overflow-x: hidden;
 	border: 0px solid red;
+	/* margin: 0px 0px 0 30px; */
 }
 .task-page .right-panel section{
 	display: flex;
@@ -277,4 +294,100 @@
 .task-page .right-panel section header{
 	margin-bottom: 20px;
 
+}
+
+.task-page.mobile{
+	border: 0px solid red;
+	max-width: 100%;
+	width: 100%;
+}
+.task-page.mobile .left-panel{
+	width: 100%;
+}
+.task-page.mobile .left-panel section.header{
+	overflow-x: scroll;
+	width: 100%;
+	border: 0px solid greenyellow;
+	justify-content: flex-start;
+	align-items: flex-start;
+	margin-right: 0px;
+}
+.task-page.mobile .left-panel section.all-tasks {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 10px 0px 20px 20px;
+	border: 0px solid red;
+	width: 100%;
+}
+.task-page.mobile .left-panel section.all-tasks .contents {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	border: 0px solid red;
+	width: auto;
+	padding: 10px;
+	margin: 10px 20px 0px 0;
+	border-radius: 25px;
+	background-color: var(--bg--light);
+}
+.task-page.mobile .left-panel section.all-tasks .contents .panel {
+	width: 100%;
+}
+.task-page.mobile .left-panel section.search-container{
+	width: 100%;
+	padding: 10px 20px;
+}
+.task-page.mobile .left-panel section.search-container .search-bar{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+	padding: 0 0px;
+	position: relative;
+	width: 100%;
+	border: 0px solid red;
+}
+.task-page.mobile .left-panel section.search-container .search-bar input{
+	flex-grow: 1;
+	padding: 15px 10px;
+	background-color: rgba(255, 255, 255, 0.050);
+	background-color: var(--bg--light);
+	/* outline: 0.5px solid rgba(255, 255, 255, 0.255); */
+	border: none;
+	color: rgb(234, 234, 234);
+	border-radius: 15px;
+	margin: 0 0px;
+	text-indent: 30px;
+}
+.task-page.mobile .left-panel section.search-container .search-bar input:focus {
+	outline: 2px solid rgba(255, 255, 255, 0.555);
+}
+.task-page.mobile .left-panel section.search-container .search-bar span {
+	padding: 10px;
+	font-size: 20px;
+
+	position: absolute;
+	top: 3px;
+	left: 5px;
+}
+@media only screen and (max-width: 1150px) {
+	.task-page .right-panel{
+		display: none;
+	}
+	.info-card{
+		padding: 15px;
+	}
+	.info-card .contents h1{
+		font-size: 30px;
+		line-height: 20px;
+	}
+	.info-card .title {
+		font-size: 15px;
+		margin: 0 0 5px 0;
+		
+	}
 }

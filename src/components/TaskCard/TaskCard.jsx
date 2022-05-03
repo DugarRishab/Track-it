@@ -35,15 +35,7 @@ const TaskCard = (props) => {
 					<span class="material-icons-round">date_range</span>
 					{task.dueDate ? task.dueDate : "-"}
 				</p>
-				{/* <p className="status">
-					{task.status === "in-progress"
-						? task.progress + "%"
-						: task.status === "done"
-						? task.status
-						: task.dueDate
-						? task.status
-						: null}
-				</p> */}
+				
 				{taskStatus()}
 			</div>
 			<div className="assigned-to">

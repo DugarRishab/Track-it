@@ -41,3 +41,13 @@
 	position: relative;
 	margin-left: 100px;
 }
+
+@media only screen and (max-width: 480px) {
+	.main-container{
+		margin-top: 0px;
+	}
+	.main-body{
+		margin-left: 0;
+		width: 100%;
+	}
+}

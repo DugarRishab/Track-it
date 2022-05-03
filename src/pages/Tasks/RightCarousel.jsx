@@ -19,7 +19,7 @@ const RightCarousel = () => {
 
 	const [currentSlide, setCurrentSlide] = useState(1);
 	const slideStyle = {
-		marginLeft: -320 * (currentSlide - 1) + "px",
+		marginLeft: -100 * (currentSlide - 1) + "%",
 	};
 	let barItterator = 0;
 
