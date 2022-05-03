@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '../Avatar/Avatar';
 import './TitleBar.css';
 
-const TitleBar = () => {
+const TitleBar = (props) => {
+	const {onMenuClick, menuOpen} = props;
 	const user = {
 		name: "Rishab",
 		img: null,
 	};
-	const pathName = window.location.pathname;
-	console.log(pathName);
+	
+	const [pathName, setPathName] = useState(window.location.pathname);
+	
+	
 	return (
 		<div className="title-bar">
-			<div className="hamburgur-menu-icon">
-				<span class="material-icons-round">menu</span>
+			<div className="hamburgur-menu-icon" onClick={() => onMenuClick()} >
+				{menuOpen ? (
+					<span class="material-icons-round">close</span>
+				) : (
+					<span class="material-icons-round">menu</span>
+				)}
 			</div>
 			<div className="title">
 				{pathName === "/tasks" && <h4>Tasks</h4>}
