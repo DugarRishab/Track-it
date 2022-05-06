@@ -35,6 +35,21 @@ button.btn--primary{
 .btn--primary:hover{
 	background-color: var(--accent80);
 }
+button.btn--primary--pink {
+	background-color: var(--pink);
+	outline: 0px solid var(--pink);
+	border: none;
+	color: rgb(234, 234, 234);
+	padding: 10px 15px;
+	margin: 1%;
+	border-radius: 20px;
+	transition: all 0s;
+}
+
+.btn--primary--pink:hover {
+	background-color: var(--accent80);
+	outline: 2px solid var(--pink);
+}
 button.btn--secondary{
 	background-color: rgba(255, 255, 255, 0);
 	color: var(--accent);

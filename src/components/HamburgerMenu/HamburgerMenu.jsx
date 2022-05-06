@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, NavLink } from "react-router-dom";
 
 import Avatar from "../Avatar/Avatar";
 import './HamburgerMenu.css';
 
-const HamburgerMenu = ({ open }) => {
+const HamburgerMenu = ({ open, onMenuClick }) => {
 	let menuStyle = {
 		left: "-250px"
 	}
@@ -15,6 +15,7 @@ const HamburgerMenu = ({ open }) => {
 	if (open) {
 		menuStyle.left = "0"
 	}
+	// useEffect(() => onMenuClick(), []);
 	return (
 		<div className="hamburger-menu-container" style={menuStyle}>
 			<div className="hamburger-menu">

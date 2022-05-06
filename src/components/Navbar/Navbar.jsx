@@ -10,10 +10,11 @@ import Avatar from "../Avatar/Avatar";
 
 const Navbar = () => {
 	const notifications = 0;
-	const user = {
-		name: "Rishab",
-		img: null
-	}
+	// const user = {
+	// 	name: "Rishab",
+	// 	img: null
+	// }
+	const user = null;
 
 	return (
 		<nav className="navbar-container">
@@ -57,7 +58,9 @@ const Navbar = () => {
 				></Button>
 			</div>
 			<div className="nav-item">
-				<div className="profile-tag">
+				{
+					user ? (
+						<div className="profile-tag">
 					<div className="user">
 						<div className="user-img">
 							{/* <img src={userImage} alt="" /> */}
@@ -70,6 +73,12 @@ const Navbar = () => {
 					</div>
 					<span class="material-icons-round dimmed dimmed">settings</span>
 				</div>
+					) : (
+							// <Button innerText="Login" buttonType="primary" onClick={null}></Button>
+						null
+					)
+				}
+				
 			</div>
 		</nav>
 	);

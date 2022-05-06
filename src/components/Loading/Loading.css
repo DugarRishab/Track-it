@@ -1,0 +1,56 @@
+:root {
+	--success25: rgb(76, 210, 3, 0.25);
+	--success: rgb(76, 210, 3, 1);
+	--accent: rgb(165, 121, 255);
+	--accent10: rgba(165, 121, 255, 0.1);
+	--accent-dark: rgb(22, 62, 0);
+}
+.loading-process{
+	width:100%;
+	height:fit-content;
+	position:relative;
+	border: 0px solid red;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	background-color: var(--accent10);
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+.loading-success{
+	width:100%;
+	height:fit-content;
+	position:relative;
+	border: 0px solid red;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	background-color: var(--accent10);
+	border-radius: 5px;
+	box-sizing: border-box;
+	background-color: var(--success25);
+}
+.loading-success .icon{
+	font-size: 30px;
+	color: var(--success);
+}
+.loading-process .icon{
+	animation: rotate 1s linear infinite;
+	font-size: 30px;
+	color: var(--accent);
+}
+@keyframes rotate{
+	0%{
+		transform: rotate(0deg);
+	}
+	50%{
+		transform: rotate(180deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
