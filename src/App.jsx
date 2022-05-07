@@ -3,6 +3,7 @@ import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import MediaQuery from "react-responsive";
 import AllRoutes from "./Routes";
 import "./App.css";
+import "./components/CustomAlert/CustomAlert.css";
 import Menu from "./components/Menu/Menu";
 import Navbar from "./components/Navbar/Navbar";
 import TitleBar from "./components/TitleBar/TitleBar";

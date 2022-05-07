@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/404/404";
 import Auth from "./pages/Auth/Auth";
@@ -11,7 +12,7 @@ const AllRoutes = () => {
 	// 	name: "Rishab",
 	// 	img: null
 	// }
-	const user = null;
+	const user = useSelector(state => state.auth.user );
 	return (
 		<Routes>
 			<Route

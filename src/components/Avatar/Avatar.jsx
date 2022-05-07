@@ -5,7 +5,7 @@ class Avatar extends Component {
 	state = {  } 
 	render() { 
 		const { size, color } = this.props;
-		const { img, name } = this.props.user;
+		const { image, name } = this.props.user;
 		const style = {
 			height: `${size}px`, 
 			width: `${size}px`
@@ -15,8 +15,8 @@ class Avatar extends Component {
 		}
 		return (
 			<div className={`avatar ${color}`} style={style}>
-				{img ? (
-					<img src={img} alt="" />
+				{image ? (
+					<img src={image} alt="" />
 				) : (
 						<p style={pStyle}>{ name[0] }</p>
 				)}

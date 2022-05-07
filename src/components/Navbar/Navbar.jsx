@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Navbar.css";
 import logo from "../../res/img/logo.png";
 import Button from "../Button/Button";
-import userImage from '../../res/img/user1.jpg';
+import userImage from "../../res/img/user1.jpg";
 import Avatar from "../Avatar/Avatar";
+import { setCurrentUser, logout } from "../../store/actions/authAction";
 
 const Navbar = () => {
 	const notifications = 0;
@@ -14,7 +15,15 @@ const Navbar = () => {
 	// 	name: "Rishab",
 	// 	img: null
 	// }
-	const user = null;
+	const user = useSelector((state) => state.auth.user);
+	console.log(user);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+	}, [dispatch]);
+	
+	
 
 	return (
 		<nav className="navbar-container">
@@ -58,27 +67,24 @@ const Navbar = () => {
 				></Button>
 			</div>
 			<div className="nav-item">
-				{
-					user ? (
-						<div className="profile-tag">
-					<div className="user">
-						<div className="user-img">
-							{/* <img src={userImage} alt="" /> */}
-							<Avatar size="50" user={user}></Avatar>
+				{user !== null ? (
+					<div className="profile-tag">
+						<div className="user">
+							<div className="user-img">
+								{/* <img src={userImage} alt="" /> */}
+								<Avatar size="50" user={user}></Avatar>
+							</div>
+							<div className="user-info">
+								<p className="name">{user.name}</p>
+								<p className="status">{user.status}</p>
+							</div>
 						</div>
-						<div className="user-info">
-							<p className="name">Rishab Dugar</p>
-							<p className="status">Have a nice day 👋</p>
-						</div>
+						<span class="material-icons-round dimmed dimmed">
+							settings
+						</span>
 					</div>
-					<span class="material-icons-round dimmed dimmed">settings</span>
-				</div>
-					) : (
-							// <Button innerText="Login" buttonType="primary" onClick={null}></Button>
-						null
-					)
-				}
-				
+				) : // <Button innerText="Login" buttonType="primary" onClick={null}></Button>
+				null}
 			</div>
 		</nav>
 	);

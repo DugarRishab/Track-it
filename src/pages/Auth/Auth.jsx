@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../res/img/logo.png";
 import "./Auth.css";
+import "../../components/CustomAlert/CustomAlert.css";
 import InputText from "../../components/InputText/InputText";
 import Button from "../../components/Button/Button";
 import AboutAuth from "./AboutAuth";
 import Loading from "../../components/Loading/Loading";
 import { alert } from "../../components/CustomAlert/alert";
+import { signup, login } from "../../store/actions/authAction";
 
 const Auth = () => {
 	const [isSignedup, setIsSignedup] = useState(true);
@@ -15,12 +19,60 @@ const Auth = () => {
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordfConfirm] = useState("");
 
+	const loading = useSelector((state) => state.auth.loading);
+	const success = useSelector((state) => state.auth.success);
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	// const alert = useAlert();
+
 	const handleSwitch = () => {
 		setIsSignedup(!isSignedup);
+		// setName(null);
+		// setEmail(null);
+		// setPassword(null);
+		// setPasswordfConfirm(null);
 	};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log({ name, email, password, passwordConfirm });
 
-	const loading = false;
-	const success = false;
+		if (isSignedup) {
+			// LOGIN ->
+			if (!email || !password) {
+				// alert.show("Enter all required fields");
+				//alert("Enter all required fields");
+				alert({ message: "Enter all required fields", type: "error" });
+			} else {
+				// API CALL ->
+				dispatch(login({ email, password }, navigate));
+			}
+		} else {
+			// signup
+			if (!email || !password || !passwordConfirm || !name) {
+				// alert.show("Enter all required fields");
+				alert({ message: "Enter all required fields", type: "error" });
+				//alert("Enter all required fields");
+			} else {
+				if (password !== passwordConfirm) {
+					// alert("Passwords doesnot match");
+					// alert.show("Passwords doesnot match");
+					alert({
+						message: "Passwords do not match",
+						type: "error",
+					});
+				} else {
+					// API CALL ->
+					dispatch(
+						signup(
+							{ email, password, name, passwordConfirm },
+							navigate
+						)
+					);
+				}
+			}
+		}
+	};;
 
 	return (
 		<section className="auth-section">
@@ -28,7 +80,7 @@ const Auth = () => {
 			<div className="auth-container">
 				{isSignedup ? <img src={logo} alt="" /> : null}
 
-				<form>
+				<form onSubmit={handleSubmit}>
 					{!isSignedup ? (
 						<InputText
 							type="text"

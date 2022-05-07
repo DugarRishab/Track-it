@@ -1,9 +1,4 @@
-:root {
-	--accent: rgb(165, 121, 255);
-	--accent80: rgba(165, 121, 255, 0.80);
-	--accent-dark: rgb(22, 62, 0);
-	
-}
+
 #--react--toast-container{
 	position: fixed;
 	width: 30%;

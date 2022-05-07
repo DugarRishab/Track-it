@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from '../Avatar/Avatar';
 import './Menu.css';
 
 const Menu = () => {
-	const user = {
-		name: "Rishab",
-		img: null,
-	};
+	const user = useSelector((state) => state.auth.user);
 	return (
 		<div className="menu-container">
 			<Link exact="true" to="/profile"></Link>
-			<Avatar user={user} size="50"></Avatar>
+			{
+				user? <Avatar user={user} size="50"></Avatar> : null
+			}
+			
 			<div className="menu-items">
 				<NavLink exact="true" to="/" className={"menu-item"}>
 					<span class="material-icons-round dimmed">grid_view</span>
