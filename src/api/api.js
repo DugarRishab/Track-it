@@ -9,3 +9,7 @@ const api = axios.create({
 export const login = (authData) => api.post("/users/login", authData);
 export const signup = (authData) => api.post("/users/signup", authData);
 export const logout = () => api.get("/users/logout");
+
+export const getUserTasks = () => api.get("/tasks/");
+export const createTasks = (taskBody) => api.post("/tasks/", taskBody);
+
