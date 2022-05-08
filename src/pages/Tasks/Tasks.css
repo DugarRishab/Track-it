@@ -33,6 +33,9 @@
 	background-color: var(--green);
 	color: white;
 }
+.info-card.active{
+	color: white !important;	
+}
 .info-card .title{
 	font-size: 15px;
 	margin: 0 0 15px 0;
@@ -218,6 +221,12 @@
 .task-page .left-panel section.header .item .body .info-card:nth-child(1){
 	margin: 0px 10px 0 0;
 }
+.task-page .left-panel section.header .category-links{
+	text-decoration: none;
+}
+.task-page .left-panel section.header .category-links.active .info-card {
+	color: white !important;
+}
 .task-page .left-panel section.all-tasks{
 	display: flex;
 	flex-direction: column;
@@ -317,6 +326,9 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	margin-right: 0px;
+}
+.task-page.mobile .left-panel section.header .category-links.active .info-card{
+	color: white !important;
 }
 .task-page.mobile .left-panel section.all-tasks {
 	display: flex;

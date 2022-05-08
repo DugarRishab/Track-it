@@ -3,9 +3,9 @@ import "./Tasks.css";
 
 
 const InfoCard = (props) => {
-	const { title, number, color } = props;
+	const { title, number, color, active } = props;
 	return ( 
-		<div className={`info-card ${color}`} >
+		<div className={`info-card ${color} ${active ? "active": null}`} >
 			<div className="title">{ title }</div>
 			<div className="contents">
 				<div className="vertical-line"></div>

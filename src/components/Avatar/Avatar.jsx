@@ -15,11 +15,12 @@ class Avatar extends Component {
 		}
 		return (
 			<div className={`avatar ${color}`} style={style}>
-				{image ? (
+				{/* {!image ? (
 					<img src={image} alt="" />
 				) : (
 						<p style={pStyle}>{ name[0] }</p>
-				)}
+				)} */}
+				<p style={pStyle}>{name[0]}</p>
 			</div>
 		);
 	}

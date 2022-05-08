@@ -47,7 +47,7 @@ const RightCarousel = () => {
 				<div className="viewers">
 					{content.map(() => {
 						barItterator++;
-						console.log(barItterator);
+						
 						return (
 							<div
 								className={`bars ${

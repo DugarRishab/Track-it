@@ -1,231 +1,137 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MediaQuery from 'react-responsive';
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import queryString from "query-string";
 
 import Avatar from '../../components/Avatar/Avatar';
 import TaskCard from '../../components/TaskCard/TaskCard';
 import Tag from '../../components/Tag/Tag';
 import InfoCard from './InfoCard';
 import RightCarousel from './RightCarousel';
+import { getUserTasks } from '../../store/actions/taskAction';
 
 import './Tasks.css';
 
 const Tasks = () => {
-	const tasks = [
-		{
-			tag: ["instagram"],
-			title: "Photo Profile Instagram",
-			description: "I wan to make a cool profile photo for Instagram",
-			dueDate: "",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "../../res/img/user1.png",
-				},
-			],
-			status: "due",
-			team: "",
-			img: "",
-			progress: "0%",
-		},
-		{
-			tag: ["Dribble"],
-			title: "Make designs",
-			description: "I wan to make a cool profile photo for Instagram",
-			dueDate: "",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "../../res/img/user1.png",
-				},
-			],
-			status: "due",
-			team: "",
-			img: "",
-			progress: 0,
-		},
-		{
-			tag: ["Sharing"],
-			title: "Create Material for sharing section",
-			description: "Create material for sharing about basic webflow",
-			dueDate: "Wed, 14th Jan 2022",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "",
-				},
-				{
-					name: "Niket",
-					img: "",
-				},
-				{
-					name: "Naman",
-					img: "",
-				},
-				{
-					name: "Akash",
-					img: "",
-				},
-			],
-			status: "in-progress",
-			team: "Enver Studio",
-			img: "",
-			progress: 70,
-		},
-		{
-			tag: ["Dribble"],
-			title: "Dribble Shot ⚡",
-			description:
-				"|'ve made a dribbble design with the task management theme",
-			dueDate: "Wed, 14th Jan 2022",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "",
-				},
-				{
-					name: "Niket",
-					img: "",
-				},
-				{
-					name: "Naman",
-					img: "",
-				},
-				{
-					name: "Akash",
-					img: "",
-				},
-			],
-			status: "done",
-			team: "Enver Studio",
-			img: "",
-			progress: 100,
-		},
-	];
-	const BacklogTasks = [
+	const dispatch = useDispatch();
+	const location = useLocation();
+	const [activeCategory, setActiveCategory] = useState("assignedToMe");
 
-		{
-			tag: ["instagram"],
-			title: "Photo Profile Instagram",
-			description: "I wan to make a cool profile photo for Instagram",
-			dueDate: "",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "../../res/img/user1.png",
-				},
-			],
-			status: "due",
-			team: "",
-			img: "",
-			progress: "0%",
-		},
-		{
-			tag: ["Dribble"],
-			title: "Make designs",
-			description: "I wan to make a cool profile photo for Instagram",
-			dueDate: "12th March 2022",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "../../res/img/user1.png",
-				},
-			],
-			status: "due",
-			team: "",
-			img: "",
-			progress: "0%",
-		},
-	];
-	const inProgressTasks = [
-		{
-			tag: ["Sharing"],
-			title: "Create Material for sharing section",
-			description: "Create material for sharing about basic webflow",
-			dueDate: "Wed, 14th Jan 2022",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "",
-				},
-				{
-					name: "Niket",
-					img: "",
-				},
-				{
-					name: "Naman",
-					img: "",
-				},
-				{
-					name: "Akash",
-					img: "",
-				},
-			],
-			status: "in-progress",
-			team: "Enver Studio",
-			img: "",
-			progress: 70,
-		},
-	];
-	const doneTasks = [
-		{
-			tag: ["Dribble", "Figma"],
-			title: "Dribble Shot ⚡",
-			description:
-				"|'ve made a dribbble design with the task management theme",
-			dueDate: "Wed, 14th Jan 2022",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "",
-				},
-				{
-					name: "Niket",
-					img: "",
-				},
-				{
-					name: "Naman",
-					img: "",
-				},
-				{
-					name: "Akash",
-					img: "",
-				},
-			],
-			status: "done",
-			team: "Enver Studio",
-			img: "",
-			progress: "100%",
-		},
-		{
-			tag: ["Dribble", "Figma"],
-			title: "Dribble Shot ⚡",
-			description:
-				"|'ve made a dribbble design with the task management theme",
-			dueDate: "Wed, 14th Jan 2022",
-			assignedTo: [
-				{
-					name: "Rishab Dugar",
-					img: "",
-				},
-				{
-					name: "Niket",
-					img: "",
-				},
-				{
-					name: "Naman",
-					img: "",
-				},
-				{
-					name: "Akash",
-					img: "",
-				},
-			],
-			status: "done",
-			team: "Enver Studio",
-			img: "",
-			progress: "100%",
-		},
-	];
+	useEffect(() => {
+
+		dispatch(getUserTasks());
+		const category = queryString.parse(location.search).category || "assignedToMe";
+		setActiveCategory(category);
+
+	}, [location, dispatch]);
+
+	// const tasks = [
+	// 	{
+	// 		tag: ["instagram"],
+	// 		title: "Photo Profile Instagram",
+	// 		description: "I wan to make a cool profile photo for Instagram",
+	// 		dueDate: "",
+	// 		assignedTo: [
+	// 			{
+	// 				name: "Rishab Dugar",
+	// 				img: "../../res/img/user1.png",
+	// 			},
+	// 		],
+	// 		status: "due",
+	// 		team: "",
+	// 		img: "",
+	// 		progress: "0%",
+	// 	},
+	// 	{
+	// 		tag: ["Dribble"],
+	// 		title: "Make designs",
+	// 		description: "I wan to make a cool profile photo for Instagram",
+	// 		dueDate: "",
+	// 		assignedTo: [
+	// 			{
+	// 				name: "Rishab Dugar",
+	// 				img: "../../res/img/user1.png",
+	// 			},
+	// 		],
+	// 		status: "due",
+	// 		team: "",
+	// 		img: "",
+	// 		progress: 0,
+	// 	},
+	// 	{
+	// 		tag: ["Sharing"],
+	// 		title: "Create Material for sharing section",
+	// 		description: "Create material for sharing about basic webflow",
+	// 		dueDate: "Wed, 14th Jan 2022",
+	// 		assignedTo: [
+	// 			{
+	// 				name: "Rishab Dugar",
+	// 				img: "",
+	// 			},
+	// 			{
+	// 				name: "Niket",
+	// 				img: "",
+	// 			},
+	// 			{
+	// 				name: "Naman",
+	// 				img: "",
+	// 			},
+	// 			{
+	// 				name: "Akash",
+	// 				img: "",
+	// 			},
+	// 		],
+	// 		status: "in-progress",
+	// 		team: "Enver Studio",
+	// 		img: "",
+	// 		progress: 70,
+	// 	},
+	// 	{
+	// 		tag: ["Dribble"],
+	// 		title: "Dribble Shot ⚡",
+	// 		description:
+	// 			"|'ve made a dribbble design with the task management theme",
+	// 		dueDate: "Wed, 14th Jan 2022",
+	// 		assignedTo: [
+	// 			{
+	// 				name: "Rishab Dugar",
+	// 				img: "",
+	// 			},
+	// 			{
+	// 				name: "Niket",
+	// 				img: "",
+	// 			},
+	// 			{
+	// 				name: "Naman",
+	// 				img: "",
+	// 			},
+	// 			{
+	// 				name: "Akash",
+	// 				img: "",
+	// 			},
+	// 		],
+	// 		status: "done",
+	// 		team: "Enver Studio",
+	// 		img: "",
+	// 		progress: 100,
+	// 	},
+	// ];
+	const assignedByMeTasks = useSelector(state => state.task.assignedByUserTasks);
+	const assignedToMeTasks = useSelector(state => state.task.assignedToUserTasks);
+	let tasks = [];
+
+	if (activeCategory === "assignedToMe") {
+		tasks = assignedToMeTasks;
+	}
+	else if (activeCategory === "assignedByMe"){
+		tasks = assignedByMeTasks;
+	}
+
+	const BacklogTasks = tasks.filter(task => task.status === "due");
+	const inProgressTasks = tasks.filter((task) => task.status === "in-progress");
+	const doneTasks = tasks.filter((task) => task.status === "done");
+	
 	// const isMobileDevice = useMediaQuery({
 	// 	query: "(min-device-width: 480px)",
 	// });
@@ -249,17 +155,17 @@ const Tasks = () => {
 								<div className="body">
 									<InfoCard
 										title="Backlog"
-										number="9"
+										number={BacklogTasks.length}
 										color="yellow"
 									></InfoCard>
 									<InfoCard
 										title="In Progress"
-										number="9"
+										number={inProgressTasks.length}
 										color="pink"
 									></InfoCard>
 									<InfoCard
 										title="Completed"
-										number="9"
+										number={doneTasks.length}
 										color="green"
 									></InfoCard>
 								</div>
@@ -267,14 +173,32 @@ const Tasks = () => {
 							<div className="item">
 								<header>Category Tasks</header>
 								<div className="body">
-									<InfoCard
-										title="Assigned by me"
-										number="2"
-									></InfoCard>
-									<InfoCard
-										title="Assigned to me"
-										number="10"
-									></InfoCard>
+									<Link
+										to={`./?category=assignedByMe`}
+										className={`category-links ${
+											activeCategory === "assignedByMe"
+												? "active"
+												: null
+										}`}
+									>
+										<InfoCard
+											title="Assigned by me"
+											number={assignedByMeTasks.length}
+										></InfoCard>
+									</Link>
+									<Link
+										to={`./?category=assignedToMe`}
+										className={`category-links ${
+											activeCategory === "assignedToMe"
+												? "active"
+												: null
+										}`}
+									>
+										<InfoCard
+											title="Assigned to me"
+											number={assignedToMeTasks.length}
+										></InfoCard>
+									</Link>
 								</div>
 							</div>
 						</section>
@@ -395,17 +319,17 @@ const Tasks = () => {
 								<div className="body">
 									<InfoCard
 										title="Backlog"
-										number="9"
+										number={BacklogTasks.length}
 										color="yellow"
 									></InfoCard>
 									<InfoCard
 										title="In Progress"
-										number="9"
+										number={inProgressTasks.length}
 										color="pink"
 									></InfoCard>
 									<InfoCard
 										title="Completed"
-										number="9"
+										number={doneTasks.length}
 										color="green"
 									></InfoCard>
 								</div>
@@ -413,14 +337,32 @@ const Tasks = () => {
 							<div className="item">
 								<header>Category Tasks</header>
 								<div className="body">
-									<InfoCard
-										title="Assigned by me"
-										number="2"
-									></InfoCard>
-									<InfoCard
-										title="Assigned to me"
-										number="10"
-									></InfoCard>
+									<Link
+										to={`./?category=assignedByMe`}
+										className={`category-links ${
+											activeCategory === "assignedByMe"
+												? "active"
+												: null
+										}`}
+									>
+										<InfoCard
+											title="Assigned by me"
+											number={assignedByMeTasks.length}
+										></InfoCard>
+									</Link>
+									<Link
+										to={`./?category=assignedToMe`}
+										className={`category-links ${
+											activeCategory === "assignedToMe"
+												? "active"
+												: null
+										}`}
+									>
+										<InfoCard
+											title="Assigned to me"
+											number={assignedToMeTasks.length}
+										></InfoCard>
+									</Link>
 								</div>
 							</div>
 						</section>

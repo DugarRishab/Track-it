@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import Avatar from "../Avatar/Avatar";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import Tag from "../Tag/Tag";
@@ -13,7 +14,7 @@ const TaskCard = (props) => {
 			case "done":
 				return <p className="status correct">{"done"}</p>;
 			case "due":
-				if (task.dueDate) return <p className="status error">{"due"}</p>;
+				if (task.endDate) return <p className="status error">{"due"}</p>;
 				else return null;
 			default:
 				return null;
@@ -22,18 +23,18 @@ const TaskCard = (props) => {
 	return (
 		<div className="task-card-container">
 			<header>
-				{task.tag.map((tag) => (
+				{task.tags.map((tag) => (
 					<Tag innerHtml={tag} type="dimmed"></Tag>
 				))}
 			</header>
-			{task.team ? <p className="team-name">{task.team}</p> : null}
+			{task.team ? <p className="team-name">{task.team.name}</p> : null}
 			<div className="title">{task.title}</div>
 			<div className="description">{task.description}</div>
 			{task.status === "in-progress" ? <ProgressBar progress={task.progress}></ProgressBar> : null}
 			<div className="info">
 				<p className="date">
 					<span class="material-icons-round">date_range</span>
-					{task.dueDate ? task.dueDate : "-"}
+					{task.endDate ? moment(task.endDate).toDate().toDateString() : "-"}
 				</p>
 				
 				{taskStatus()}
