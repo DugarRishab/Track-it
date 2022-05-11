@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import Avatar from "../Avatar/Avatar";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import Tag from "../Tag/Tag";
 import "./TaskCard.css";
+import CheckBox from "../CheckBox/CheckBox";
 
 const TaskCard = (props) => {
 	const { task } = props;
@@ -14,12 +15,17 @@ const TaskCard = (props) => {
 			case "done":
 				return <p className="status correct">{"done"}</p>;
 			case "due":
-				if (task.endDate) return <p className="status error">{"due"}</p>;
+				if (task.endDate)
+					return <p className="status error">{"due"}</p>;
 				else return null;
 			default:
 				return null;
 		}
-	}
+	};
+	const [expand, setExpand] = useState(false);
+	const handleExpand = () => {
+		setExpand(!expand);
+	};
 	return (
 		<div className="task-card-container">
 			<header>
@@ -28,15 +34,45 @@ const TaskCard = (props) => {
 				))}
 			</header>
 			{task.team ? <p className="team-name">{task.team.name}</p> : null}
-			<div className="title">{task.title}</div>
+			<div className="title">
+				<p>{task.title}</p>
+				{task.subTasks.length === 0 ? null : (
+					<span class="material-icons-round" onClick={handleExpand}>
+						{!expand ? "expand_more" : "expand_less"}
+					</span>
+				)}
+			</div>
 			<div className="description">{task.description}</div>
-			{task.status === "in-progress" ? <ProgressBar progress={task.progress}></ProgressBar> : null}
+			{task.status === "in-progress" ? (
+				<ProgressBar progress={task.progress}></ProgressBar>
+			) : null}
+
+			{task.subTasks.length === 0 ? null : (
+				<div className={`sub-tasks ${expand ? "expand" : null}`}>
+					<p>Sub Tasks: </p>
+					{task.subTasks.map((subTask) => (
+						<label>
+							{/* <input type="checkbox" name="" id="" /> */}
+							<CheckBox></CheckBox>
+							<div>
+								<p>{subTask.title}</p>
+								<p className="description">
+									{subTask.description}
+								</p>
+							</div>
+						</label>
+					))}
+				</div>
+			)}
+
 			<div className="info">
 				<p className="date">
 					<span class="material-icons-round">date_range</span>
-					{task.endDate ? moment(task.endDate).toDate().toDateString() : "-"}
+					{task.endDate
+						? moment(task.endDate).toDate().toDateString()
+						: "-"}
 				</p>
-				
+
 				{taskStatus()}
 			</div>
 			<div className="assigned-to">
@@ -50,7 +86,9 @@ const TaskCard = (props) => {
 					) : null}
 				</div>
 
-				{ task.assignedTo.length > 3 ? `+ ${task.assignedTo.length - 3} others` : null}
+				{task.assignedTo.length > 3
+					? `+ ${task.assignedTo.length - 3} others`
+					: null}
 			</div>
 		</div>
 	);
