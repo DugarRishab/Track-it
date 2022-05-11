@@ -37,7 +37,7 @@ nav.navbar-container .nav-items{
 	justify-content: flex-start;
 	align-items: center;
 	border: 0px solid green;
-	min-width: calc(90% - 300px);
+	min-width: calc(75%);
 	height: 100%;
 }
 .nav-item{
@@ -108,8 +108,16 @@ nav.navbar-container .nav-items{
 	top: 12px;
 	left: 10px;
 }
+.nav-item.add-task{
+	white-space: nowrap;
+	
+}
+.nav-item.profile{
+	width: 25%;
+}
 .nav-item .profile-tag{
 	width: 300px;
+	width: 100%;
 	border: 0px solid blue;
 	display: flex;
 	flex-direction: row;

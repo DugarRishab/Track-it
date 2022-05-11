@@ -12,6 +12,7 @@ import RightCarousel from './RightCarousel';
 import { getUserTasks } from '../../store/actions/taskAction';
 
 import './Tasks.css';
+import AddTask from '../AddTask/AddTask';
 
 const Tasks = () => {
 	const dispatch = useDispatch();
@@ -148,6 +149,7 @@ const Tasks = () => {
 		<>
 			<MediaQuery minWidth={1025}>
 				<div className="task-page">
+					
 					<div className="left-panel">
 						<section className="header">
 							<div className="item">

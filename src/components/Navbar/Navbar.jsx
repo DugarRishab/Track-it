@@ -60,13 +60,14 @@ const Navbar = () => {
 					</span>
 				</NavLink>
 				{/* <Link></Link> */}
-				<Button
-					className="nav-item"
-					innerText="Add Task +"
-					buttonType="primary"
-				></Button>
+				<Link to={"/addTask"} className="nav-item add-task" >
+					<Button
+						innerText="Add Task +"
+						buttonType="primary"
+					></Button>
+				</Link>
 			</div>
-			<div className="nav-item">
+			<div className="nav-item profile">
 				{user !== null ? (
 					<div className="profile-tag">
 						<div className="user">
@@ -83,8 +84,16 @@ const Navbar = () => {
 							settings
 						</span>
 					</div>
-				) : // <Button innerText="Login" buttonType="primary" onClick={null}></Button>
-				null}
+				) : (
+					// <Button innerText="Login" buttonType="primary" onClick={null}></Button>
+					<Link to={"/auth"}>
+						<Button
+							buttonType="primary"
+							color="pink"
+							innerText="Login"
+						></Button>
+					</Link>
+				)}
 			</div>
 		</nav>
 	);
