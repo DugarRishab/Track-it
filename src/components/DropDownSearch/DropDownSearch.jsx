@@ -91,7 +91,7 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
 				) : selectedItems.length > 0 ? (
 					<div className="profile">
 						<Avatar
-							size="40"
+							size="30"
 							user={options.find(
 								(option) => option.val === selectedItems
 							)}

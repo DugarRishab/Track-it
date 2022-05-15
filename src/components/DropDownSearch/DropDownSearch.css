@@ -11,6 +11,8 @@
 .dropdown-search-container{
 	border: 0px solid red;
 	position: relative;
+	width: 100%;
+	min-width: 100%;
 }
 .dropdown-search-container .selected-items{
 	border:  0px solid green;
@@ -19,12 +21,14 @@
 	margin: 5px 0;
 	padding: 5px;
 	border: 1px solid rgba(255, 255, 255, 0.252);
+	border: 1px solid var(--green);
 	border-radius: 15px;
 	font-size: 15px;
 }
 .dropdown-search-container .selected-items .profile span{
 	font-size: 15px;
 	cursor: pointer;
+	color: var(--pink);
 }
 .dropdown-search-container .selected-items .profile .user-info{
 	display: flex;
