@@ -7,9 +7,10 @@ class Avatar extends Component {
 		const { size, color } = this.props;
 		const { image, name } = this.props.user;
 		const style = {
-			height: `${size}px`, 
-			width: `${size}px`
-		} 
+			height: `${size}px`,
+			width: `${size}px`,
+			minWidth: `${size}px`,
+		}; 
 		const pStyle = {
 			fontSize: size*0.5
 		}

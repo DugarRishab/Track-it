@@ -32,17 +32,17 @@
 	outline: 1px solid rgb(149, 149, 149);
 }
 .tag.primary.green{
-	background-color: var(--green);
+	background-color: var(--green) !important;
 	box-shadow: inset -5px 0 5px rgba(255, 255, 255, 0.2),
 	inset 5px 0 5px rgba(255, 255, 255, 0.2);
 }
 .tag.primary.yellow {
-	background-color: var(--yellow);
+	background-color: var(--yellow) !important;
 	box-shadow: inset -5px 0 5px rgba(255, 255, 255, 0.2),
 		inset 5px 0 5px rgba(255, 255, 255, 0.2);
 }
 .tag.primary.pink {
-	background-color: var(--pink);
+	background-color: var(--pink) !important;
 	box-shadow: inset -5px 0 5px rgba(255, 255, 255, 0.2),
 		inset 5px 0 5px rgba(255, 255, 255, 0.2);
 }
@@ -66,4 +66,9 @@
 }
 .tag.secondary.yellow:hover {
 	outline: 2px solid var(--yellow);
+}
+.tag span{
+	font-size: 15px;
+	margin-left: 5px;
+	cursor: pointer;
 }

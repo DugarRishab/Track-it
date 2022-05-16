@@ -8,6 +8,9 @@
 	--green: rgb(67, 185, 126);
 	--green--fadded: rgba(67, 185, 126, 0.255);
 }
+.check-box{
+	cursor: pointer;
+}
 .check-box input[type="checkbox"]{
 	display: none;
 }
