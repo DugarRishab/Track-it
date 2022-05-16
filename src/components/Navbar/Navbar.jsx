@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./Navbar.css";
@@ -8,6 +8,7 @@ import Button from "../Button/Button";
 import userImage from "../../res/img/user1.jpg";
 import Avatar from "../Avatar/Avatar";
 import { setCurrentUser, logout } from "../../store/actions/authAction";
+import { openAddTaskForm, closeAddTaskForm } from '../../store/actions/taskAction';
 
 const Navbar = () => {
 	const notifications = 0;
@@ -15,6 +16,7 @@ const Navbar = () => {
 	// 	name: "Rishab",
 	// 	img: null
 	// }
+	const location = useLocation();
 	const user = useSelector((state) => state.auth.user);
 	console.log(user);
 	const dispatch = useDispatch();
@@ -22,7 +24,15 @@ const Navbar = () => {
 	useEffect(() => {
 		dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
 	}, [dispatch]);
+
+	const isAddTaskFormOpen = useSelector(state => state.task.openAddTaskForm);
 	
+	const handleActionBtnClick = () => {
+		if (location.pathname.startsWith("/tasks")) {
+			!isAddTaskFormOpen && dispatch(openAddTaskForm());
+			isAddTaskFormOpen && dispatch(closeAddTaskForm());
+		}
+	}
 	
 
 	return (
@@ -60,12 +70,8 @@ const Navbar = () => {
 					</span>
 				</NavLink>
 				{/* <Link></Link> */}
-				<Link to={"/addTask"} className="nav-item add-task" >
-					<Button
-						innerText="Add Task +"
-						buttonType="primary"
-					></Button>
-				</Link>
+				
+				<Button innerText="Add Task +" buttonType="primary" onClick={handleActionBtnClick}></Button>
 			</div>
 			<div className="nav-item profile">
 				{user !== null ? (
