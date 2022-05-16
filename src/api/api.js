@@ -13,3 +13,6 @@ export const logout = () => api.get("/users/logout");
 export const getUserTasks = () => api.get("/tasks/");
 export const createTasks = (taskBody) => api.post("/tasks/", taskBody);
 
+export const getUserProjects = () => api.get("/projects");
+export const getUserTeams = () => api.get("/teams");
+export const getUserUsers = () => api.get("/users");

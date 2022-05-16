@@ -9,23 +9,37 @@ import TaskCard from '../../components/TaskCard/TaskCard';
 import Tag from '../../components/Tag/Tag';
 import InfoCard from './InfoCard';
 import RightCarousel from './RightCarousel';
-import { getUserTasks } from '../../store/actions/taskAction';
+import { getUserTasks, openAddTaskForm, closeAddTaskForm } from '../../store/actions/taskAction';
+
+
 
 import './Tasks.css';
 import AddTask from '../AddTask/AddTask';
+import { getUserProjects } from '../../store/actions/projectAction';
+import { getUserTeams } from '../../store/actions/teamAction';
+import { getUserUsers } from '../../store/actions/userActions';
 
 const Tasks = () => {
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const [activeCategory, setActiveCategory] = useState("assignedToMe");
+	// const [addTaskOpen, setAddTaskOpen] = useState(false);
+	const addTaskOpen = useSelector(state => state.task.openAddTaskForm);
 
 	useEffect(() => {
 
 		dispatch(getUserTasks());
-		const category = queryString.parse(location.search).category || "assignedToMe";
+		dispatch(getUserProjects());
+		dispatch(getUserTeams());
+		dispatch(getUserUsers());
+		
+	}, [dispatch]);
+	useEffect(() => {
+		const category =
+			queryString.parse(location.search).category || "assignedToMe";
 		setActiveCategory(category);
 
-	}, [location, dispatch]);
+	}, [location]);
 
 	// const tasks = [
 	// 	{
@@ -149,7 +163,12 @@ const Tasks = () => {
 		<>
 			<MediaQuery minWidth={1025}>
 				<div className="task-page">
-					
+					{addTaskOpen ? (
+						<div className="add-task-container">
+							<AddTask></AddTask>
+						</div>
+					) : null}
+
 					<div className="left-panel">
 						<section className="header">
 							<div className="item">

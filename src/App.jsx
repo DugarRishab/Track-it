@@ -9,7 +9,6 @@ import Menu from "./components/Menu/Menu";
 import Navbar from "./components/Navbar/Navbar";
 import TitleBar from "./components/TitleBar/TitleBar";
 import HamburgerMenu from "./components/HamburgerMenu/HamburgerMenu";
-import { getUserTasks } from "./store/actions/taskAction";
 
 const App = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -24,10 +23,6 @@ const App = () => {
 	if (menuOpen) {
 		mainBodyStyle.marginLeft = "250px";
 	}
-	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch(getUserTasks());
-	// }, [dispatch]);
 
 	return (
 		<Router>
