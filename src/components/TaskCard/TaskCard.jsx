@@ -26,9 +26,18 @@ const TaskCard = (props) => {
 	const handleExpand = () => {
 		setExpand(!expand);
 	};
+	const choosePrimaryColor = () => {
+		const random = Math.random();
+		if (random >= 0 && random < 0.3) return "green";
+		if (random >= 0.3 && random < 0.6) return "pink";
+		if (random >= 0.6 && random <= 1) return "yellow";
+	}
 	return (
 		<div className="task-card-container">
 			<header>
+				{task.project ? (
+					<Tag innerHtml={task.project.name} type="primary" color={choosePrimaryColor()}></Tag>
+				) : null}
 				{task.tags.map((tag) => (
 					<Tag innerHtml={tag} type="dimmed"></Tag>
 				))}
