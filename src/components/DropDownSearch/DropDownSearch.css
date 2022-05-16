@@ -76,6 +76,9 @@
 .dropdown-search-container .dropdown-list .option.selected{
 	background-color: var(--green);
 }
+.dropdown-search-container ::-webkit-scrollbar{
+	display: none !important;
+}
 .profile{
 	display: flex;
 	flex-direction: row;

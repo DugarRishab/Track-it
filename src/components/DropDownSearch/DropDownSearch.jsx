@@ -18,31 +18,38 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
 	const onSelect = (val) => {
 		if (multiple) {
 			if (!selectedItems.includes(val)) {
-				console.log(val);
-				setSelectedItems([...selectedItems, val]);
+				const selectedItemsCopy = [...selectedItems];
+				selectedItemsCopy.push(val);
+
+				onSelectItem(selectedItemsCopy);
+				setSelectedItems(selectedItemsCopy);
+				
 			}
 		} else {
+			onSelectItem(val);
 			setSelectedItems(val);
 		}
 
-		onSelectItem(selectedItems);
+		
 	};
 	const onRemove = (val) => {
 		if (multiple) {
-			setSelectedItems((selectedItems) =>
-				selectedItems.filter((item) => item !== val)
-			);
+			const selectedItemsCopy = selectedItems.filter((item) => item !== val);
+			onSelectItem(selectedItemsCopy);
+			setSelectedItems(selectedItemsCopy);
+			
 		} else {
+			onSelectItem(null);
 			setSelectedItems("");
 		}
 	};
 
 	const searchDropDown = (options, val) => {
-		if (val.length >= 3) {
+		if (val.length >= 1) {
 			const results = options.filter((option) =>
 				option.name.toUpperCase().includes(val.toUpperCase())
 			);
-			console.log(results);
+			// console.log(results);
 			// return results;
 			setOptionsToBeViewed(results);
 		} else {
