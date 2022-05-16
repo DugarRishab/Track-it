@@ -12,7 +12,7 @@ export const signup = (authData, navigate) => async (dispatch) => {
 		});
 		navigate("/");
 	} catch (err) {
-		alert({ message: err.message, type: "error" });
+		alert({ message: err.response.data.message, type: "error" });
 		console.log(err);
 		dispatch({ type: "GET_AUTH_FAILURE" });
 	}
@@ -26,7 +26,7 @@ export const login = (authData, navigate) => async (dispatch) => {
 		navigate("/");
 		
 	} catch (err) {
-		alert({ message: err.message, type: "error" });
+		alert({ message: err.response.data.message, type: "error" });
 		console.log(err)
 		dispatch({ type: "GET_AUTH_FAILURE" });
 	}
@@ -41,7 +41,7 @@ export const logout = (navigate) => async (dispatch) => {
 			navigate("/");
 		}, 2000);
 	} catch (err) {
-		alert({ message: err.message, type: "error" });
+		alert({ message: err.response.data.message, type: "error" });
 		dispatch({ type: "FETCH_AUTH_FAILURE" });
 	}
 };
