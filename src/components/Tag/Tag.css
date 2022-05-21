@@ -31,6 +31,10 @@
 	color: white;
 	outline: 1px solid rgb(149, 149, 149);
 }
+.tag.primary{
+	color: white;
+	font-weight: 600;
+}
 .tag.primary.green{
 	background-color: var(--green) !important;
 	box-shadow: inset -5px 0 5px rgba(255, 255, 255, 0.2),

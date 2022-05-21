@@ -244,13 +244,12 @@ const Tasks = () => {
 										innerHtml={
 											<>
 												Backlog &nbsp;
-												<Avatar
-													user={{
-														name: `${BacklogTasks.length}`,
-													}}
-													size="25"
+												<Tag
+													innerHtml={ <p>{BacklogTasks.length}</p>}
 													color="yellow"
-												></Avatar>
+													type="primary"
+													minWidth="28px"
+												></Tag>
 											</>
 										}
 										color="yellow"
@@ -265,13 +264,12 @@ const Tasks = () => {
 										innerHtml={
 											<>
 												In Progress &nbsp;
-												<Avatar
-													user={{
-														name: `${inProgressTasks.length}`,
-													}}
-													size="25"
+												<Tag
+													innerHtml={ <p>{inProgressTasks.length}</p>}
 													color="pink"
-												></Avatar>
+													type="primary"
+													minWidth="28px"
+												></Tag>
 											</>
 										}
 										color="pink"
@@ -286,13 +284,12 @@ const Tasks = () => {
 										innerHtml={
 											<>
 												Done &nbsp;
-												<Avatar
-													user={{
-														name: `${doneTasks.length}`,
-													}}
-													size="25"
+												<Tag
+													innerHtml={ <p>{doneTasks.length}</p>}
 													color="green"
-												></Avatar>
+													type="primary"
+													minWidth="28px"
+												></Tag>
 											</>
 										}
 										color="green"

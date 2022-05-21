@@ -62,7 +62,7 @@ const TaskCard = (props) => {
 					{task.subTasks.map((subTask) => (
 						<label>
 							{/* <input type="checkbox" name="" id="" /> */}
-							<CheckBox></CheckBox>
+							<CheckBox initialChecked={subTask.status === "done" ? true : false}></CheckBox>
 							<div>
 								<p>{subTask.title}</p>
 								<p className="description">
