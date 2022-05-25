@@ -9,15 +9,15 @@ import TaskCard from '../../components/TaskCard/TaskCard';
 import Tag from '../../components/Tag/Tag';
 import InfoCard from './InfoCard';
 import RightCarousel from './RightCarousel';
-import { getUserTasks, openAddTaskForm, closeAddTaskForm } from '../../store/actions/taskAction';
+import AddTask from "../AddTask/AddTask";
+import "./Tasks.css";
+
+import { getUserTasks, openAddTaskForm, closeAddTaskForm, completeTask } from '../../store/actions/taskAction';
+import { getUserProjects } from "../../store/actions/projectAction";
+import { getUserTeams } from "../../store/actions/teamAction";
+import { getUserUsers } from "../../store/actions/userActions";
 
 
-
-import './Tasks.css';
-import AddTask from '../AddTask/AddTask';
-import { getUserProjects } from '../../store/actions/projectAction';
-import { getUserTeams } from '../../store/actions/teamAction';
-import { getUserUsers } from '../../store/actions/userActions';
 
 const Tasks = () => {
 	const dispatch = useDispatch();
@@ -25,20 +25,11 @@ const Tasks = () => {
 	const [activeCategory, setActiveCategory] = useState("assignedToMe");
 	// const [addTaskOpen, setAddTaskOpen] = useState(false);
 	const addTaskOpen = useSelector(state => state.task.openAddTaskForm);
-
-	useEffect(() => {
-
-		dispatch(getUserTasks());
-		dispatch(getUserProjects());
-		dispatch(getUserTeams());
-		dispatch(getUserUsers());
-		
-	}, [dispatch]);
+	
 	useEffect(() => {
 		const category =
 			queryString.parse(location.search).category || "assignedToMe";
 		setActiveCategory(category);
-
 	}, [location]);
 
 	// const tasks = [
@@ -132,6 +123,7 @@ const Tasks = () => {
 	// 		progress: 100,
 	// 	},
 	// ];
+	
 	const assignedByMeTasks = useSelector(state => state.task.assignedByUserTasks);
 	const assignedToMeTasks = useSelector(state => state.task.assignedToUserTasks);
 	let tasks = [];
@@ -146,6 +138,37 @@ const Tasks = () => {
 	const BacklogTasks = tasks.filter(task => task.status === "due");
 	const inProgressTasks = tasks.filter((task) => task.status === "in-progress");
 	const doneTasks = tasks.filter((task) => task.status === "done");
+
+	// const handleOnComplete =
+
+	// useEffect(() => {
+	// 	const handleOnComplete = (taskId) => {
+	// 		console.log("COMPLETINGNNNNNNNN");
+	// 		dispatch(completeTask(taskId));
+	// 		// dispatch(getUserTasks());
+	// 	};
+
+	// }, [handleOnComplete]);
+	const handleOnComplete = async (taskId) => {
+			console.log("COMPLETINGNNNNNNNN");
+			dispatch(completeTask(taskId));
+			// dispatch(getUserTasks());
+	};
+
+	// useEffect(() => {
+	// 	dispatch(getUserTasks());
+	// }, [assignedByMeTasks, assignedToMeTasks, dispatch]);
+
+	const handleOnDelete = () => {};
+	const handleOnEdit = () => { };
+	
+	useEffect(() => {
+		console.log("EFFECT CALLED");
+		dispatch(getUserTasks());
+		dispatch(getUserProjects());
+		dispatch(getUserTeams());
+		dispatch(getUserUsers());
+	}, [dispatch]);
 	
 	// const isMobileDevice = useMediaQuery({
 	// 	query: "(min-device-width: 480px)",
@@ -245,7 +268,13 @@ const Tasks = () => {
 											<>
 												Backlog &nbsp;
 												<Tag
-													innerHtml={ <p>{BacklogTasks.length}</p>}
+													innerHtml={
+														<p>
+															{
+																BacklogTasks.length
+															}
+														</p>
+													}
 													color="yellow"
 													type="primary"
 													minWidth="28px"
@@ -256,7 +285,12 @@ const Tasks = () => {
 										type="secondary"
 									></Tag>
 									{BacklogTasks.map((task) => (
-										<TaskCard task={task}></TaskCard>
+										<TaskCard
+											task={task}
+											handleOnComplete={handleOnComplete}
+											handleOnEdit={handleOnEdit}
+											handleOnDelete={handleOnDelete}
+										></TaskCard>
 									))}
 								</div>
 								<div className="panel">
@@ -265,7 +299,13 @@ const Tasks = () => {
 											<>
 												In Progress &nbsp;
 												<Tag
-													innerHtml={ <p>{inProgressTasks.length}</p>}
+													innerHtml={
+														<p>
+															{
+																inProgressTasks.length
+															}
+														</p>
+													}
 													color="pink"
 													type="primary"
 													minWidth="28px"
@@ -276,7 +316,12 @@ const Tasks = () => {
 										type="secondary"
 									></Tag>
 									{inProgressTasks.map((task) => (
-										<TaskCard task={task}></TaskCard>
+										<TaskCard
+											task={task}
+											handleOnComplete={handleOnComplete}
+											handleOnEdit={handleOnEdit}
+											handleOnDelete={handleOnDelete}
+										></TaskCard>
 									))}
 								</div>
 								<div className="panel">
@@ -285,7 +330,11 @@ const Tasks = () => {
 											<>
 												Done &nbsp;
 												<Tag
-													innerHtml={ <p>{doneTasks.length}</p>}
+													innerHtml={
+														<p>
+															{doneTasks.length}
+														</p>
+													}
 													color="green"
 													type="primary"
 													minWidth="28px"
@@ -296,7 +345,12 @@ const Tasks = () => {
 										type="secondary"
 									></Tag>
 									{doneTasks.map((task) => (
-										<TaskCard task={task}></TaskCard>
+										<TaskCard
+											task={task}
+											handleOnComplete={handleOnComplete}
+											handleOnEdit={handleOnEdit}
+											handleOnDelete={handleOnDelete}
+										></TaskCard>
 									))}
 								</div>
 							</div>
@@ -471,7 +525,6 @@ const Tasks = () => {
 			</MediaQuery>
 		</>
 	);
-
 }
  
 export default Tasks;

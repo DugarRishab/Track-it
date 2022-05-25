@@ -16,6 +16,12 @@ button.btn{
 	border-radius: 20px;
 	transition: all 0s;
 	cursor: pointer;
+	white-space: nowrap;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 button.btn:focus,
 button.btn:hover {
@@ -35,21 +41,34 @@ button.btn--primary{
 .btn--primary:hover{
 	background-color: var(--accent80);
 }
-button.btn--primary--pink {
+
+button.btn--primary.pink {
 	background-color: var(--pink);
 	outline: 0px solid var(--pink);
-	border: none;
-	color: rgb(234, 234, 234);
-	padding: 10px 15px;
-	margin: 1%;
-	border-radius: 20px;
-	transition: all 0s;
 }
-
-.btn--primary--pink:hover {
+.btn--primary.pink:hover {
 	background-color: var(--accent80);
 	outline: 2px solid var(--pink);
 }
+
+button.btn--primary.green {
+	background-color: var(--green);
+	outline: 0px solid var(--green);
+}
+.btn--primary.green:hover {
+	background-color: var(--accent80);
+	outline: 2px solid var(--green);
+}
+
+button.btn--primary.yellow {
+	background-color: var(--yellow);
+	outline: 0px solid var(--yellow);
+}
+.btn--primary.yellow:hover {
+	background-color: var(--accent80);
+	outline: 2px solid var(--yellow);
+}
+
 button.btn--secondary{
 	background-color: rgba(255, 255, 255, 0);
 	color: var(--accent);
@@ -81,8 +100,26 @@ button.btn--tertiary:hover{
 	outline: none;
 	border: none;
 }
+button.btn--tertiary:hover{
+	text-decoration: none;
+	outline: none;
+	border: none;
+}
 button.btn--tertiary:focus,
 button.btn--tertiary:hover{
 	outline: none;
 	border: none;
+}
+button.btn span {
+	font-size: 18px;
+	line-height: 15px;
+	margin-left: 5px;
+	padding: none;
+	text-decoration: none;
+}
+button.btn--tertiary:hover span {
+	text-decoration: none !important;
+}
+button.btn--tertiary:hover span:hover{
+	text-decoration: none !important;
 }

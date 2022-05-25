@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Avatar from "../Avatar/Avatar";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import Tag from "../Tag/Tag";
 import "./TaskCard.css";
 import CheckBox from "../CheckBox/CheckBox";
+import Button from "../Button/Button";
+import { useSelector, useDispatch } from "react-redux";
+import ThreeDotMenu from "../ThreeDotMenu/ThreeDotMenu";
+import { completeTask, getUserTasks } from "../../store/actions/taskAction";
+import { getUserProjects } from "../../store/actions/projectAction";
+import { getUserTeams } from "../../store/actions/teamAction";
+import { getUserUsers } from "../../store/actions/userActions";
 
 const TaskCard = (props) => {
-	const { task } = props;
+	const currentUser = useSelector((state) => state.auth.user);
+	const { task, handleOnComplete, handleOnDelete, handleOnEdit } = props;
+	const dispatch = useDispatch();
 	const taskStatus = () => {
 		switch (task.status) {
 			case "in-progress":
@@ -31,16 +40,69 @@ const TaskCard = (props) => {
 		if (random >= 0 && random < 0.3) return "green";
 		if (random >= 0.3 && random < 0.6) return "pink";
 		if (random >= 0.6 && random <= 1) return "yellow";
+	};
+	const handleOnClickDelete = () => {
+		handleOnDelete(task.id);
 	}
+	const handleOnClickComplete = () => {
+		handleOnComplete(task.id);
+	};
+	const handleOnClickEdit = () => {
+		handleOnEdit(task.id);
+	};
+	
+	let menuOptions = [];
+	if (currentUser.id === task.assignedBy.id) {
+		menuOptions = [
+			{
+				title: (
+					<>
+						Done
+						<span class="material-icons-round">done</span>
+					</>
+				),
+				onClick: handleOnClickComplete,
+			},
+			{
+				title: (
+					<>
+						Edit
+						<span class="material-icons-round">edit</span>
+					</>
+				),
+				onClick: handleOnClickEdit,
+			},
+			{
+				title: (
+					<>
+						Delete
+						<span class="material-icons-round">clear</span>
+					</>
+				),
+				onClick: handleOnClickDelete,
+			},
+		];
+	}
+	
 	return (
 		<div className="task-card-container">
 			<header>
-				{task.project ? (
-					<Tag innerHtml={task.project.name} type="primary" color={choosePrimaryColor()}></Tag>
-				) : null}
-				{task.tags.map((tag) => (
-					<Tag innerHtml={tag} type="dimmed"></Tag>
-				))}
+				<div className="tags">
+					{task.project ? (
+						<Tag
+							innerHtml={task.project.name}
+							type="primary"
+							color={choosePrimaryColor()}
+						></Tag>
+					) : null}
+					{task.tags.map((tag) => (
+						<Tag innerHtml={tag} type="dimmed"></Tag>
+					))}
+				</div>
+				<ThreeDotMenu
+					options={menuOptions}
+					position="bottom-left"
+				></ThreeDotMenu>
 			</header>
 			{task.team ? <p className="team-name">{task.team.name}</p> : null}
 			<div className="title">
@@ -62,7 +124,11 @@ const TaskCard = (props) => {
 					{task.subTasks.map((subTask) => (
 						<label>
 							{/* <input type="checkbox" name="" id="" /> */}
-							<CheckBox initialChecked={subTask.status === "done" ? true : false}></CheckBox>
+							<CheckBox
+								initialChecked={
+									subTask.status === "done" ? true : false
+								}
+							></CheckBox>
 							<div>
 								<p>{subTask.title}</p>
 								<p className="description">
@@ -99,6 +165,7 @@ const TaskCard = (props) => {
 					? `+ ${task.assignedTo.length - 3} others`
 					: null}
 			</div>
+			
 		</div>
 	);
 };

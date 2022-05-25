@@ -14,7 +14,7 @@ export const getUserTasks = () => async (dispatch) => {
 export const createTask = (taskBody) => async (dispatch) => {
 	try {
 		const res = await api.createTasks(taskBody);
-		
+		alert({ message: "New Task Created successfully", type: "success" });
 		dispatch({ type: "CREATE_TASK", payload: res.data.data });
 	}
 	catch (err) {
@@ -27,4 +27,15 @@ export const openAddTaskForm = () => (dispatch) => {
 }
 export const closeAddTaskForm = () => (dispatch) => {
 	dispatch({ type: "CLOSE_ADD_TASK_FORM" });
+}
+export const completeTask = (id) => async (dispatch) => {
+	try {
+		const res = await api.completeTask(id);
+		alert({ message: "Task Completed", type: "success" });
+		dispatch({ type: "COMPLETE_TASK", payload: res.data.data });
+	}
+	catch (err) {
+		alert({ message: err.response.data.message, type: "error" });
+		console.log(err);
+	}
 }

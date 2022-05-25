@@ -39,6 +39,10 @@ const ThreeDotMenu = ({ options, position }) => {
 				top: '30px',
 			};
 	}
+	const handleOptionClick = (option) => {
+		setMenuOpen(false);
+		option.onClick();
+	}
 
 	return (
 		<div className="three-dot-menu-container">
@@ -52,7 +56,7 @@ const ThreeDotMenu = ({ options, position }) => {
 					{options.map((option) => (
 						<div
 							className="option"
-							onClick={() => option.onClick()}
+							onClick={() => handleOptionClick(option)}
 						>
 							{option.title}
 						</div>
