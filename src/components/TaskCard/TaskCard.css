@@ -27,6 +27,12 @@
 .task-card-container header{
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.task-card-container header .tags{
+	display: flex;
+	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
 }
@@ -141,6 +147,23 @@
 }
 .task-card-container .progressbar-container{
 	margin: 10px 0;
+}
+.task-card-container .action-btns{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	border: 1px solid red;
+}
+.task-card-container .action-btns .btn:last-child{
+	margin-right: 0px;
+	padding-right: 0px;
+}
+
+.task-card-container .images{
+	width: 100%;
+	margin-top: 10px;
 }
 
  ::-webkit-scrollbar {

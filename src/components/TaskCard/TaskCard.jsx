@@ -12,6 +12,7 @@ import { completeTask, getUserTasks } from "../../store/actions/taskAction";
 import { getUserProjects } from "../../store/actions/projectAction";
 import { getUserTeams } from "../../store/actions/teamAction";
 import { getUserUsers } from "../../store/actions/userActions";
+import Carousel from "../Carousel/Carousel";
 
 const TaskCard = (props) => {
 	const currentUser = useSelector((state) => state.auth.user);
@@ -114,6 +115,13 @@ const TaskCard = (props) => {
 				)}
 			</div>
 			<div className="description">{task.description}</div>
+			{
+				<div className="images">
+					{task.images.length > 0 ? (
+						<Carousel contents={task.images} height='200px'></Carousel>
+					) : null}
+				</div>
+			}
 			{task.status === "in-progress" ? (
 				<ProgressBar progress={task.progress}></ProgressBar>
 			) : null}
@@ -165,7 +173,6 @@ const TaskCard = (props) => {
 					? `+ ${task.assignedTo.length - 3} others`
 					: null}
 			</div>
-			
 		</div>
 	);
 };
