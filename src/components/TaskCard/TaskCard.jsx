@@ -8,10 +8,10 @@ import CheckBox from "../CheckBox/CheckBox";
 import Button from "../Button/Button";
 import { useSelector, useDispatch } from "react-redux";
 import ThreeDotMenu from "../ThreeDotMenu/ThreeDotMenu";
-import { completeTask, getUserTasks } from "../../store/actions/taskAction";
-import { getUserProjects } from "../../store/actions/projectAction";
-import { getUserTeams } from "../../store/actions/teamAction";
-import { getUserUsers } from "../../store/actions/userActions";
+// import { completeTask, getUserTasks } from "../../store/actions/taskAction";
+// import { getUserProjects } from "../../store/actions/projectAction";
+// import { getUserTeams } from "../../store/actions/teamAction";
+// import { getUserUsers } from "../../store/actions/userActions";
 import Carousel from "../Carousel/Carousel";
 
 const TaskCard = (props) => {
