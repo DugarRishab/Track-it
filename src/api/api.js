@@ -3,7 +3,8 @@ axios.defaults.withCredentials = true;
 
 const api = axios.create({
 	// baseURL: "https://doubt-overflow-api.herokuapp.com/api/v1",
-	baseURL: "http://localhost:8000/api/v2",
+	// baseURL: "http://localhost:8000/api/v2",
+	baseURL: "https://track-it-v2.herokuapp.com",
 });
 
 export const login = (authData) => api.post("/users/login", authData);
