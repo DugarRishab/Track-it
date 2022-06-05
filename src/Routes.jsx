@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+	import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/404/404";
 import Auth from "./pages/Auth/Auth";
 import NoUser from "./pages/NoUser/NoUser";

@@ -9,6 +9,7 @@ import userImage from "../../res/img/user1.jpg";
 import Avatar from "../Avatar/Avatar";
 import { setCurrentUser, logout } from "../../store/actions/authAction";
 import { openAddTaskForm, closeAddTaskForm } from '../../store/actions/taskAction';
+import { getUserTasks } from "../../socket/actions/taskAction";
 
 const Navbar = () => {
 	const notifications = 0;
@@ -28,6 +29,7 @@ const Navbar = () => {
 	const isAddTaskFormOpen = useSelector(state => state.task.openAddTaskForm);
 	
 	const handleActionBtnClick = () => {
+		// getUserTasks();
 		if (location.pathname.startsWith("/tasks")) {
 			!isAddTaskFormOpen && dispatch(openAddTaskForm());
 			isAddTaskFormOpen && dispatch(closeAddTaskForm());

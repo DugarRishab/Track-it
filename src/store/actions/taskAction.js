@@ -39,3 +39,10 @@ export const completeTask = (id) => async (dispatch) => {
 		console.log(err);
 	}
 }
+export const setUpdatedTask = (task, type) => (dispatch) => {
+	const payload = {
+		type,
+		task
+	};
+	dispatch({ type: "SET_UPDATED_TASK", payload });
+}

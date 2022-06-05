@@ -7,14 +7,11 @@ import CustomDatePicker from "../../components/DatePicker/DatePicker";
 import DropDownSearch from "../../components/DropDownSearch/DropDownSearch";
 import Tag from "../../components/Tag/Tag";
 
-
 import { createTask, closeAddTaskForm } from "../../store/actions/taskAction";
 
 import "./AddTask.css";
 
 const AddTask = () => {
-	
-
 
 	const projects = useSelector(state => state.project.projects);
 	const teams = useSelector((state) => state.team.teams);
@@ -36,10 +33,8 @@ const AddTask = () => {
 		project.val = project._id;
 		projectOptions.push(project);
 	});
-	console.log(teamOptions);
-	console.log(projectOptions);
-
-	
+	// console.log(teamOptions);
+	// console.log(projectOptions);
 
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
@@ -129,7 +124,8 @@ const AddTask = () => {
 			endDate,
 			tags,
 			reminder,
-			subTasks
+			subTasks,
+			// image: demoImg
 		}
 
 		console.log(newTaskBody);
@@ -240,36 +236,12 @@ const AddTask = () => {
 							onClick={() => handleAddSubTask()}
 						></Button>
 					</label>
-					<label htmlFor="" className="form-item">
-						<p>Tags:</p>
+					<label className="form-item upload-img">
+						<p>Images:</p>
 						<input
-							type="text"
-							placeholder="Add Tags. Press Enter after every Tag"
-							onKeyDown={(e) => handleAddTag(e)}
-							value={currentTag}
-							onChange={(e) => setCurrentTag(e.target.value)}
+							type="file"
+							accept="image/png, image/jpg, image/jpeg, image/webp"
 						/>
-						<div className="tags-list">
-							{tags.map((tag, i) => (
-								<Tag
-									type="dimmed"
-									tag={tag}
-									innerHtml={
-										<>
-											<p>{tag}</p>
-											<span
-												class="material-icons-round"
-												onClick={() =>
-													handleRemoveTag(i)
-												}
-											>
-												close
-											</span>
-										</>
-									}
-								></Tag>
-							))}
-						</div>
 					</label>
 				</div>
 				<div className="right-form">
@@ -307,6 +279,37 @@ const AddTask = () => {
 							placeholder="Search for Project"
 						></DropDownSearch>
 					</label>
+					<label htmlFor="" className="form-item">
+						<p>Tags:</p>
+						<input
+							type="text"
+							placeholder="Add Tags. Press Enter after every Tag"
+							onKeyDown={(e) => handleAddTag(e)}
+							value={currentTag}
+							onChange={(e) => setCurrentTag(e.target.value)}
+						/>
+						<div className="tags-list">
+							{tags.map((tag, i) => (
+								<Tag
+									type="dimmed"
+									tag={tag}
+									innerHtml={
+										<>
+											<p>{tag}</p>
+											<span
+												class="material-icons-round"
+												onClick={() =>
+													handleRemoveTag(i)
+												}
+											>
+												close
+											</span>
+										</>
+									}
+								></Tag>
+							))}
+						</div>
+					</label>
 					<label className="horizontal">
 						<CheckBox
 							initialChecked={reminder}
@@ -315,7 +318,12 @@ const AddTask = () => {
 						<p>Reminder?</p>
 					</label>
 					<div className="action-btns">
-						<Button type="button" buttonType="" innerText="Cancel" onClick={handleCloseAddTaskForm}></Button>
+						<Button
+							type="button"
+							buttonType=""
+							innerText="Cancel"
+							onClick={handleCloseAddTaskForm}
+						></Button>
 						<Button
 							type="button"
 							buttonType="primary"

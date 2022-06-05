@@ -44,14 +44,14 @@ const TaskCard = (props) => {
 	};
 	const handleOnClickDelete = () => {
 		handleOnDelete(task.id);
-	}
+	};
 	const handleOnClickComplete = () => {
 		handleOnComplete(task.id);
 	};
 	const handleOnClickEdit = () => {
 		handleOnEdit(task.id);
 	};
-	
+
 	let menuOptions = [];
 	if (currentUser.id === task.assignedBy.id) {
 		menuOptions = [
@@ -84,7 +84,7 @@ const TaskCard = (props) => {
 			},
 		];
 	}
-	
+
 	return (
 		<div className="task-card-container">
 			<header>
@@ -115,13 +115,16 @@ const TaskCard = (props) => {
 				)}
 			</div>
 			<div className="description">{task.description}</div>
-			{
+			{task.images ? (
 				<div className="images">
 					{task.images.length > 0 ? (
-						<Carousel contents={task.images} height='200px'></Carousel>
+						<Carousel
+							contents={task.images}
+							height="200px"
+						></Carousel>
 					) : null}
 				</div>
-			}
+			) : null}
 			{task.status === "in-progress" ? (
 				<ProgressBar progress={task.progress}></ProgressBar>
 			) : null}

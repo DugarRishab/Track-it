@@ -98,12 +98,12 @@
 	margin-left: 5px;
 	cursor: pointer;
 }
-.add-task-form form .left-form .form-item .tags-list{
+.add-task-form form .form-item .tags-list{
 	display: flex;
 	flex-flow: row wrap;
 	margin-top: 5px;
 }
-.add-task-form form .left-form .form-item .tags-list .tag{
+.add-task-form form .form-item .tags-list .tag{
 	margin: 5px;
 }
 
@@ -113,6 +113,14 @@
 	min-width: 220px;
 	max-width: 220px;
 }
+.add-task-form form .form-item.upload-img input::-webkit-file-upload-button {
+	visibility: hidden;
+	width: 0px;
+	height: 0px;
+}
+
+
+
 .add-task-form form .right-form label:not(:first-child){
 	margin-top: 20px;
 }

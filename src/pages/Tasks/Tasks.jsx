@@ -12,7 +12,7 @@ import RightCarousel from './RightCarousel';
 import AddTask from "../AddTask/AddTask";
 import "./Tasks.css";
 
-import { getUserTasks, openAddTaskForm, closeAddTaskForm, completeTask } from '../../store/actions/taskAction';
+import { getUserTasks, openAddTaskForm, closeAddTaskForm, completeTask, setUpdatedTask } from '../../store/actions/taskAction';
 import { getUserProjects } from "../../store/actions/projectAction";
 import { getUserTeams } from "../../store/actions/teamAction";
 import { getUserUsers } from "../../store/actions/userActions";
@@ -20,6 +20,7 @@ import { getUserUsers } from "../../store/actions/userActions";
 
 
 const Tasks = () => {
+	const currentUser = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const [activeCategory, setActiveCategory] = useState("assignedToMe");
@@ -126,19 +127,41 @@ const Tasks = () => {
 	
 	const assignedByMeTasks = useSelector(state => state.task.assignedByUserTasks);
 	const assignedToMeTasks = useSelector(state => state.task.assignedToUserTasks);
-	let tasks = [];
+	const updateTask = useSelector(state => state.task.updateTask);
+	let tasks = [], BacklogTasks = [], inProgressTasks = [], doneTasks = [];
+	
 
 	if (activeCategory === "assignedToMe") {
 		tasks = assignedToMeTasks;
+		// BacklogTasks = assignedToMeTasks.filter(
+		// 	(task) => task.status === "due"
+		// );
+		// inProgressTasks = assignedToMeTasks.filter(
+		// 	(task) => task.status === "in-progress"
+		// );
+		// doneTasks = assignedToMeTasks.filter((task) => task.status === "done");
 	}
 	else if (activeCategory === "assignedByMe"){
 		tasks = assignedByMeTasks;
+		// BacklogTasks = assignedByMeTasks.filter(
+		// 	(task) => task.status === "due"
+		// );
+		// inProgressTasks = assignedByMeTasks.filter(
+		// 	(task) => task.status === "in-progress"
+		// );
+		// doneTasks = assignedByMeTasks.filter((task) => task.status === "done");
 	}
 
-	const BacklogTasks = tasks.filter(task => task.status === "due");
-	const inProgressTasks = tasks.filter((task) => task.status === "in-progress");
-	const doneTasks = tasks.filter((task) => task.status === "done");
-
+	// useEffect(() => {
+	// 	BacklogTasks = tasks.filter((task) => task.status === "due");
+	// 	inProgressTasks = tasks.filter((task) => task.status === "in-progress");
+	// 	doneTasks = tasks.filter((task) => task.status === "done");
+	// }, [])
+	console.log("length", tasks.length);
+	BacklogTasks = tasks.filter(task => task.status === "due");
+	inProgressTasks = tasks.filter((task) => task.status === "in-progress");
+	doneTasks = tasks.filter((task) => task.status === "done");
+	console.log(BacklogTasks.length, inProgressTasks.length, doneTasks.length);
 	// const handleOnComplete =
 
 	// useEffect(() => {
@@ -149,15 +172,31 @@ const Tasks = () => {
 	// 	};
 
 	// }, [handleOnComplete]);
-	const handleOnComplete = async (taskId) => {
-			console.log("COMPLETINGNNNNNNNN");
-			dispatch(completeTask(taskId));
-			// dispatch(getUserTasks());
+	const handleOnComplete = (taskId) => {
+		console.log("COMPLETINGNNNNNNNN");
+		dispatch(completeTask(taskId));
 	};
 
-	// useEffect(() => {
-	// 	dispatch(getUserTasks());
-	// }, [assignedByMeTasks, assignedToMeTasks, dispatch]);
+	useEffect(() => {	
+		const updatedTask = JSON.parse(localStorage.getItem("updatedTask"));
+		console.log(updatedTask);
+		if (updatedTask && updateTask) {
+			console.log(updatedTask);
+			let assignedTo = false;
+			updatedTask.assignedTo.forEach((user) => {
+				if (user.id === currentUser.id) {
+					assignedTo = true;
+				}
+			});
+			if (assignedTo) {
+				dispatch(setUpdatedTask(updatedTask, "assignedTo"));
+			}
+			if (updatedTask.assignedBy.id === currentUser.id) {
+				dispatch(setUpdatedTask(updatedTask, "assignedBy"));
+			}
+		}
+		
+	}, [updateTask, dispatch, currentUser]);
 
 	const handleOnDelete = () => {};
 	const handleOnEdit = () => { };

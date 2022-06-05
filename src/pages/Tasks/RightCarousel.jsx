@@ -31,7 +31,7 @@ const RightCarousel = () => {
 		}
 	};
 	return (
-		<div className="carousel">
+		<div className="blogs-carousel">
 			<div className="slides" style={slideStyle}>
 				{content.map((item) => (
 					<div className="item">
