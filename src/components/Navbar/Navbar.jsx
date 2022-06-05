@@ -9,7 +9,6 @@ import userImage from "../../res/img/user1.jpg";
 import Avatar from "../Avatar/Avatar";
 import { setCurrentUser, logout } from "../../store/actions/authAction";
 import { openAddTaskForm, closeAddTaskForm } from '../../store/actions/taskAction';
-import { getUserTasks } from "../../socket/actions/taskAction";
 
 const Navbar = () => {
 	const notifications = 0;
