@@ -18,7 +18,7 @@
 	width: 100%;
 	height: fit-content;
 	background-color: var(--bg--light);
-	border-radius: 25px;
+	border-radius: 15px;
 }
 .hamburger-menu .menu-title{
 	color: white;

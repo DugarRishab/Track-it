@@ -9,9 +9,10 @@
 	--green--fadded: rgba(67, 185, 126, 0.255);
 }
 .add-task-form{
-	height: 500px;
+	height: 80vh;
 	width: 700px;
 	overflow: scroll;
+	border: 0px solid red;
 }
 .add-task-form form{
 	display: flex;
