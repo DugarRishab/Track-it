@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 import Button from "../../components/Button/Button";
 import CheckBox from "../../components/CheckBox/CheckBox";
 import { alert } from "../../components/CustomAlert/alert";
@@ -7,15 +8,19 @@ import CustomDatePicker from "../../components/DatePicker/DatePicker";
 import DropDownSearch from "../../components/DropDownSearch/DropDownSearch";
 import Tag from "../../components/Tag/Tag";
 
-import { createTask, closeAddTaskForm } from "../../store/actions/taskAction";
+import { createTask, closeAddTaskForm, updateTask } from "../../store/actions/taskAction";
 
 import "./AddTask.css";
 
-const AddTask = () => {
-
-	const projects = useSelector(state => state.project.projects);
+const AddTask = ({ task }) => {
+	
+	const projects = useSelector((state) => state.project.projects);
 	const teams = useSelector((state) => state.team.teams);
 	const users = useSelector((state) => state.user.users);
+	const taskToBeUpdated = useSelector(state => state.task.taskToBeUpdated);
+	if (taskToBeUpdated) {
+		task = taskToBeUpdated;
+	}
 
 	const userOptions = [];
 	const teamOptions = [];
@@ -33,60 +38,77 @@ const AddTask = () => {
 		project.val = project._id;
 		projectOptions.push(project);
 	});
-	// console.log(teamOptions);
-	// console.log(projectOptions);
+	
+	const defaultAssignedTo = task?.assignedTo.map((user) => user.id);
+	const defaultTeam = task?.team?.id || null;
+	const defaultProject = task?.project?._id || null;
 
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
-	const [assignedToUsers, setAssignedToUsers] = useState([]);
-	const [assignedToTeam, setAssignedToTeam] = useState(null);
-	const [project, setProject] = useState(null);
-	const [subTasks, setsubTasks] = useState([]);
+	const [title, setTitle] = useState(task ? task.title : "");
+	const [description, setDescription] = useState(
+		task ? task.description || "" : ""
+	);
+	const [assignedToUsers, setAssignedToUsers] = useState(
+		task ? defaultAssignedTo || [] : []
+	);
+	const [assignedToTeam, setAssignedToTeam] = useState(
+		task ? defaultTeam || null : null
+	);
+	const [project, setProject] = useState(
+		task ? defaultProject || null : null
+	);
+
+	const [subTasks, setsubTasks] = useState(task ? task.subTasks || [] : []);
 	const [subTaskTitle, setSubTaskTitle] = useState("");
 	const [subTaskDescription, setSubTaskDescription] = useState("");
-	const [endDate, setEndDate] = useState(new Date());
-	const [tags, setTags] = useState([]);
+	const [endDate, setEndDate] = useState(
+		new Date(task?.endDate || Date.now()) || new Date()
+	);
+	const [tags, setTags] = useState(task ? task.tags || [] : []);
 	const [currentTag, setCurrentTag] = useState("");
-	const [reminder, setReminder] = useState(false);
+	const [reminder, setReminder] = useState(task ? task.reminder || false : false);
 	const [noSubTasksWarning, setNoSubTasksWarning] = useState(0);
 
 	const dispatch = useDispatch();
-	
+
 	const handleAddSubTask = () => {
 		if (subTaskTitle.length > 0) {
-			setsubTasks([...subTasks, { title: subTaskTitle, description: subTaskDescription }]);
+			setsubTasks([
+				...subTasks,
+				{ title: subTaskTitle, description: subTaskDescription },
+			]);
 			setSubTaskTitle("");
 			setSubTaskDescription("");
-		}
-		else {
+		} else {
 			alert({ message: "Title cannot be empty", type: "error" });
 		}
-	}
+	};
 	const editSubTask = (val, i, type) => {
 		const subTasksCopy = [...subTasks];
 		if (type === "title") {
 			subTasksCopy[i].title = val;
-		}
-		else {
+		} else {
 			subTasksCopy[i].description = val;
 		}
 
 		setsubTasks(subTasksCopy);
-	}
+	};
 	const handleRemoveTag = (i) => {
 		const tagsCopy = [...tags];
 		tagsCopy.splice(i, 1);
 		setTags(tagsCopy);
-	}
+	};
 	const handleAddTag = (e) => {
 		if (e.key === "Enter" && currentTag.length > 0) {
 			setTags([...tags, e.target.value]);
 			setCurrentTag("");
 		}
-	}
+	};
 	const handleSubmit = () => {
 		if (title.length === 0) {
-			return alert({ message: "TASK: Title can't be empty", type: "error" });
+			return alert({
+				message: "TASK: Title can't be empty",
+				type: "error",
+			});
 		}
 		if (!endDate) {
 			return alert({
@@ -126,21 +148,23 @@ const AddTask = () => {
 			reminder,
 			subTasks,
 			// image: demoImg
-		}
+		};
 
 		console.log(newTaskBody);
-		dispatch(createTask(newTaskBody));
-
-	}
+		if(task) 
+			dispatch(updateTask(task.id, newTaskBody));
+		else
+			dispatch(createTask(newTaskBody));
+	};
 	const handleRemoveSubTask = (i) => {
-		console.log("CLICK")
+		console.log("CLICK");
 		const subTasksCopy = [...subTasks];
 		subTasksCopy.splice(i, 1);
 		setsubTasks(subTasksCopy);
-	}
+	};
 	const handleCloseAddTaskForm = () => {
 		dispatch(closeAddTaskForm());
-	}
+	};
 
 	return (
 		<div className="add-task-form">
@@ -153,6 +177,7 @@ const AddTask = () => {
 							name="title"
 							id="title"
 							placeholder="Title"
+							value={title}
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</label>
@@ -162,20 +187,21 @@ const AddTask = () => {
 							placeholder="Description"
 							id="description"
 							name="description"
+							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 						></textarea>
 					</label>
 					<label className="form-item sub-tasks">
 						<p>Sub Tasks:</p>
 						<div className="sub-task-list">
-							{subTasks.map((task, i) => (
+							{subTasks.map((subTask, i) => (
 								<div className="sub-task-container">
 									<p className="">Sub task {i + 1}: </p>
 									<div className="sub-task">
 										<input
 											type="text"
 											placeholder="Title"
-											value={task.title}
+											value={subTask.title}
 											onInput={(e) =>
 												editSubTask(
 													e.target.value,
@@ -187,7 +213,7 @@ const AddTask = () => {
 										<textarea
 											type="text"
 											placeholder="Description"
-											value={task.description}
+											value={subTask.description}
 											onInput={(e) =>
 												editSubTask(
 													e.target.value,
@@ -256,6 +282,7 @@ const AddTask = () => {
 						<p>Assigned To Users</p>
 						<DropDownSearch
 							multiple={true}
+							defaultSelected={assignedToUsers}
 							options={userOptions}
 							onSelectItem={(val) => setAssignedToUsers(val)}
 							placeholder="Search for Users"
@@ -264,6 +291,7 @@ const AddTask = () => {
 					<label htmlFor="">
 						<p>Assigned To Team</p>
 						<DropDownSearch
+							defaultSelected={assignedToTeam}
 							multiple={false}
 							options={teamOptions}
 							onSelectItem={(val) => setAssignedToTeam(val)}
@@ -273,6 +301,7 @@ const AddTask = () => {
 					<label htmlFor="">
 						<p>Add a Project</p>
 						<DropDownSearch
+							defaultSelected={project}
 							multiple={false}
 							options={projectOptions}
 							onSelectItem={(val) => setProject(val)}

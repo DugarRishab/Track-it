@@ -17,8 +17,6 @@ import { getUserProjects } from "../../store/actions/projectAction";
 import { getUserTeams } from "../../store/actions/teamAction";
 import { getUserUsers } from "../../store/actions/userActions";
 
-
-
 const Tasks = () => {
 	const currentUser = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
@@ -32,98 +30,6 @@ const Tasks = () => {
 			queryString.parse(location.search).category || "assignedToMe";
 		setActiveCategory(category);
 	}, [location]);
-
-	// const tasks = [
-	// 	{
-	// 		tag: ["instagram"],
-	// 		title: "Photo Profile Instagram",
-	// 		description: "I wan to make a cool profile photo for Instagram",
-	// 		dueDate: "",
-	// 		assignedTo: [
-	// 			{
-	// 				name: "Rishab Dugar",
-	// 				img: "../../res/img/user1.png",
-	// 			},
-	// 		],
-	// 		status: "due",
-	// 		team: "",
-	// 		img: "",
-	// 		progress: "0%",
-	// 	},
-	// 	{
-	// 		tag: ["Dribble"],
-	// 		title: "Make designs",
-	// 		description: "I wan to make a cool profile photo for Instagram",
-	// 		dueDate: "",
-	// 		assignedTo: [
-	// 			{
-	// 				name: "Rishab Dugar",
-	// 				img: "../../res/img/user1.png",
-	// 			},
-	// 		],
-	// 		status: "due",
-	// 		team: "",
-	// 		img: "",
-	// 		progress: 0,
-	// 	},
-	// 	{
-	// 		tag: ["Sharing"],
-	// 		title: "Create Material for sharing section",
-	// 		description: "Create material for sharing about basic webflow",
-	// 		dueDate: "Wed, 14th Jan 2022",
-	// 		assignedTo: [
-	// 			{
-	// 				name: "Rishab Dugar",
-	// 				img: "",
-	// 			},
-	// 			{
-	// 				name: "Niket",
-	// 				img: "",
-	// 			},
-	// 			{
-	// 				name: "Naman",
-	// 				img: "",
-	// 			},
-	// 			{
-	// 				name: "Akash",
-	// 				img: "",
-	// 			},
-	// 		],
-	// 		status: "in-progress",
-	// 		team: "Enver Studio",
-	// 		img: "",
-	// 		progress: 70,
-	// 	},
-	// 	{
-	// 		tag: ["Dribble"],
-	// 		title: "Dribble Shot ⚡",
-	// 		description:
-	// 			"|'ve made a dribbble design with the task management theme",
-	// 		dueDate: "Wed, 14th Jan 2022",
-	// 		assignedTo: [
-	// 			{
-	// 				name: "Rishab Dugar",
-	// 				img: "",
-	// 			},
-	// 			{
-	// 				name: "Niket",
-	// 				img: "",
-	// 			},
-	// 			{
-	// 				name: "Naman",
-	// 				img: "",
-	// 			},
-	// 			{
-	// 				name: "Akash",
-	// 				img: "",
-	// 			},
-	// 		],
-	// 		status: "done",
-	// 		team: "Enver Studio",
-	// 		img: "",
-	// 		progress: 100,
-	// 	},
-	// ];
 	
 	const assignedByMeTasks = useSelector(state => state.task.assignedByUserTasks);
 	const assignedToMeTasks = useSelector(state => state.task.assignedToUserTasks);
@@ -133,47 +39,18 @@ const Tasks = () => {
 
 	if (activeCategory === "assignedToMe") {
 		tasks = assignedToMeTasks;
-		// BacklogTasks = assignedToMeTasks.filter(
-		// 	(task) => task.status === "due"
-		// );
-		// inProgressTasks = assignedToMeTasks.filter(
-		// 	(task) => task.status === "in-progress"
-		// );
-		// doneTasks = assignedToMeTasks.filter((task) => task.status === "done");
+		
 	}
 	else if (activeCategory === "assignedByMe"){
 		tasks = assignedByMeTasks;
-		// BacklogTasks = assignedByMeTasks.filter(
-		// 	(task) => task.status === "due"
-		// );
-		// inProgressTasks = assignedByMeTasks.filter(
-		// 	(task) => task.status === "in-progress"
-		// );
-		// doneTasks = assignedByMeTasks.filter((task) => task.status === "done");
+		
 	}
 
-	// useEffect(() => {
-	// 	BacklogTasks = tasks.filter((task) => task.status === "due");
-	// 	inProgressTasks = tasks.filter((task) => task.status === "in-progress");
-	// 	doneTasks = tasks.filter((task) => task.status === "done");
-	// }, [])
-	console.log("length", tasks.length);
 	BacklogTasks = tasks.filter(task => task.status === "due");
 	inProgressTasks = tasks.filter((task) => task.status === "in-progress");
 	doneTasks = tasks.filter((task) => task.status === "done");
-	console.log(BacklogTasks.length, inProgressTasks.length, doneTasks.length);
-	// const handleOnComplete =
-
-	// useEffect(() => {
-	// 	const handleOnComplete = (taskId) => {
-	// 		console.log("COMPLETINGNNNNNNNN");
-	// 		dispatch(completeTask(taskId));
-	// 		// dispatch(getUserTasks());
-	// 	};
-
-	// }, [handleOnComplete]);
+	
 	const handleOnComplete = (taskId) => {
-		console.log("COMPLETINGNNNNNNNN");
 		dispatch(completeTask(taskId));
 	};
 
@@ -199,7 +76,10 @@ const Tasks = () => {
 	}, [updateTask, dispatch, currentUser]);
 
 	const handleOnDelete = () => {};
-	const handleOnEdit = () => { };
+	const handleOnEdit = (id) => { 
+		console.log(tasks.find(task => task.id === id));
+		dispatch(openAddTaskForm(tasks.find((task) => task.id === id)));
+	};
 	
 	useEffect(() => {
 		console.log("EFFECT CALLED");
@@ -327,7 +207,9 @@ const Tasks = () => {
 										<TaskCard
 											task={task}
 											handleOnComplete={handleOnComplete}
-											handleOnEdit={handleOnEdit}
+											handleOnEdit={(task) =>
+												handleOnEdit(task)
+											}
 											handleOnDelete={handleOnDelete}
 										></TaskCard>
 									))}
@@ -358,7 +240,9 @@ const Tasks = () => {
 										<TaskCard
 											task={task}
 											handleOnComplete={handleOnComplete}
-											handleOnEdit={handleOnEdit}
+											handleOnEdit={(task) =>
+												handleOnEdit(task)
+											}
 											handleOnDelete={handleOnDelete}
 										></TaskCard>
 									))}
@@ -387,7 +271,9 @@ const Tasks = () => {
 										<TaskCard
 											task={task}
 											handleOnComplete={handleOnComplete}
-											handleOnEdit={handleOnEdit}
+											handleOnEdit={(task) =>
+												handleOnEdit(task)
+											}
 											handleOnDelete={handleOnDelete}
 										></TaskCard>
 									))}

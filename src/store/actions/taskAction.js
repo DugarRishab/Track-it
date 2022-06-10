@@ -22,8 +22,8 @@ export const createTask = (taskBody) => async (dispatch) => {
 		console.log(err);
 	}
 }
-export const openAddTaskForm = () => (dispatch) => {
-	dispatch({ type: "OPEN_ADD_TASK_FORM" });
+export const openAddTaskForm = (task) => (dispatch) => {
+	dispatch({ type: "OPEN_ADD_TASK_FORM", payload: { task } || null });
 }
 export const closeAddTaskForm = () => (dispatch) => {
 	dispatch({ type: "CLOSE_ADD_TASK_FORM" });
@@ -45,4 +45,15 @@ export const setUpdatedTask = (task, type) => (dispatch) => {
 		task
 	};
 	dispatch({ type: "SET_UPDATED_TASK", payload });
+}
+export const updateTask = (taskId, task) => async (dispatch) => {
+	try {
+		const res = await api.updateTask(taskId, task);
+		alert({ message: "Task Updated", type: "success" });
+		dispatch({ type: "UPDATE_TASK", payload: res.data.data.task });
+	}
+	catch (err) {
+		alert({ message: err.response.data.message, type: "error" });
+		console.log(err);
+	}
 }

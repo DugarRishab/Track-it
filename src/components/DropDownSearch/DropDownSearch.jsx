@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import "./DropDownSearch.css";
 
-const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
-	const [selectedItems, setSelectedItems] = useState([]);
+const DropDownSearch = ({ options, multiple, onSelectItem, placeholder, defaultSelected }) => {
+	const [selectedItems, setSelectedItems] = useState(defaultSelected || []);
 	if (multiple) {
 		
 	}
@@ -15,6 +15,13 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
 	// 	},
 	// ];
 	// console.log(selectedItems);
+	// console.log(
+	// 	"defaultSelected: ",
+	// 	typeof defaultSelected,
+	// 	defaultSelected.length,
+	// 	defaultSelected
+	// );
+	
 	const onSelect = (val) => {
 		if (multiple) {
 			if (!selectedItems.includes(val)) {
@@ -29,8 +36,6 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
 			onSelectItem(val);
 			setSelectedItems(val);
 		}
-
-		
 	};
 	const onRemove = (val) => {
 		if (multiple) {
@@ -43,7 +48,6 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
 			setSelectedItems("");
 		}
 	};
-
 	const searchDropDown = (options, val) => {
 		if (val.length >= 1) {
 			const results = options.filter((option) =>
@@ -57,7 +61,8 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
 		}
 	};
 
-	const showDropDown = () => {};
+	const showDropDown = () => { };
+	
 	return (
 		<div className="dropdown-search-container">
 			<div className="search">
@@ -95,21 +100,24 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder }) => {
 							</span>
 						</div>
 					))
-				) : selectedItems.length > 0 ? (
-					<div className="profile">
-						<Avatar
-							size="30"
-							user={options.find(
-								(option) => option.val === selectedItems
-							)}
-						></Avatar>
-						<p>
-							{
-								options.find(
+				) : selectedItems !== null && selectedItems.length > 0 ? (
+					<div className="profile profile--with-close">
+						<div className="user-info">
+							<Avatar
+								size="30"
+								user={options.find(
 									(option) => option.val === selectedItems
-								).name
-							}
-						</p>
+								)}
+							></Avatar>
+							<p>
+								{
+									options.find(
+										(option) => option.val === selectedItems
+									)?.name
+								}
+							</p>
+						</div>
+
 						<span
 							class="material-icons-round"
 							onClick={() => onRemove(selectedItems)}

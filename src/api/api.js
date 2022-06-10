@@ -14,6 +14,7 @@ export const logout = () => api.get("/users/logout");
 export const getUserTasks = () => api.get("/tasks/");
 export const createTasks = (taskBody) => api.post("/tasks/", taskBody);
 export const completeTask = (taskId) => api.get(`/tasks/complete/${taskId}`);
+export const updateTask = (taskId, task) => api.patch(`/tasks/${taskId}`, task);
 
 export const getUserProjects = () => api.get("/projects");
 export const getUserTeams = () => api.get("/teams");
