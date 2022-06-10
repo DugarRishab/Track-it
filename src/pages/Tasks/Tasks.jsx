@@ -38,12 +38,10 @@ const Tasks = () => {
 	
 
 	if (activeCategory === "assignedToMe") {
-		tasks = assignedToMeTasks;
-		
+		tasks = assignedToMeTasks;	
 	}
 	else if (activeCategory === "assignedByMe"){
 		tasks = assignedByMeTasks;
-		
 	}
 
 	BacklogTasks = tasks.filter(task => task.status === "due");
@@ -56,9 +54,9 @@ const Tasks = () => {
 
 	useEffect(() => {	
 		const updatedTask = JSON.parse(localStorage.getItem("updatedTask"));
-		console.log(updatedTask);
+		
 		if (updatedTask && updateTask) {
-			console.log(updatedTask);
+			
 			let assignedTo = false;
 			updatedTask.assignedTo.forEach((user) => {
 				if (user.id === currentUser.id) {

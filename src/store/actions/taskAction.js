@@ -50,7 +50,7 @@ export const updateTask = (taskId, task) => async (dispatch) => {
 	try {
 		const res = await api.updateTask(taskId, task);
 		alert({ message: "Task Updated", type: "success" });
-		dispatch({ type: "UPDATE_TASK", payload: res.data.data.task });
+		dispatch({ type: "UPDATE_TASK", payload: res.data.data });
 	}
 	catch (err) {
 		alert({ message: err.response.data.message, type: "error" });
