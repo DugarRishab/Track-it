@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MediaQuery, { useMediaQuery } from "react-responsive";
 import moment from "moment";
 import Button from "../../components/Button/Button";
 import CheckBox from "../../components/CheckBox/CheckBox";
@@ -166,8 +167,28 @@ const AddTask = ({ task }) => {
 		dispatch(closeAddTaskForm());
 	};
 
+	const isSmallScreen = useMediaQuery({
+		query: "(max-device-width: 480px)",
+	});
+	const isLargeScreen = useMediaQuery({
+		query: "(min-device-width: 1025px)",
+	});
+	const isMediumScreen = !isSmallScreen && !isLargeScreen;
+
+
 	return (
 		<div className="add-task-form">
+			{isSmallScreen && (
+				<header>
+					<div className="title">Add Task</div>
+					<span
+						class="material-icons-round"
+						onClick={handleCloseAddTaskForm}
+					>
+						close
+					</span>
+				</header>
+			)}
 			<form action="javascript:void(0)">
 				<div className="left-form">
 					<label htmlFor="title" className="form-item">
