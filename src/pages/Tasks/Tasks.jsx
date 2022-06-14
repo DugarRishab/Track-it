@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MediaQuery, { useMediaQuery } from "react-responsive";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,9 +28,28 @@ const Tasks = () => {
 	const currentUser = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
 	const location = useLocation();
+	const ref = useRef();
 	const [activeCategory, setActiveCategory] = useState("assignedToMe");
 	// const [addTaskOpen, setAddTaskOpen] = useState(false);
 	const addTaskOpen = useSelector((state) => state.task.openAddTaskForm);
+
+	useEffect(() => {
+		const checkIfClickedOutside = (e) => {
+			// If the menu is open and the clicked target is not within the menu,
+			// then close the menu
+			
+			if (addTaskOpen && ref.current && !ref.current.contains(e.target)) {
+				dispatch(closeAddTaskForm());
+			}
+		};
+
+		document.addEventListener("mousedown", checkIfClickedOutside);
+
+		return () => {
+			// Cleanup the event listener
+			document.removeEventListener("mousedown", checkIfClickedOutside);
+		};
+	}, [addTaskOpen, dispatch]);
 
 	useEffect(() => {
 		const category =
@@ -113,7 +132,7 @@ const Tasks = () => {
 		<>
 			<div className="task-page">
 				{addTaskOpen ? (
-					<div className="add-task-container">
+					<div className="add-task-container" ref={ref}>
 						<AddTask></AddTask>
 					</div>
 				) : null}

@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Avatar from "../Avatar/Avatar";
 import "./DropDownSearch.css";
 
 const DropDownSearch = ({ options, multiple, onSelectItem, placeholder, defaultSelected }) => {
 	const [selectedItems, setSelectedItems] = useState(defaultSelected || []);
-	if (multiple) {
-		
-	}
+	const ref = useRef();
 	const [optionsToBeViewed, setOptionsToBeViewed] = useState([]);
 	// options = [
 	// 	{
@@ -21,7 +19,22 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder, defaultS
 	// 	defaultSelected.length,
 	// 	defaultSelected
 	// );
-	
+	useEffect(() => {
+		const checkIfClickedOutside = (e) => {
+			// If the menu is open and the clicked target is not within the menu,
+			// then close the menu
+			if (optionsToBeViewed.length > 0 && ref.current && !ref.current.contains(e.target)) {
+				setOptionsToBeViewed([]);
+			}
+		};
+
+		document.addEventListener("mousedown", checkIfClickedOutside);
+
+		return () => {
+			// Cleanup the event listener
+			document.removeEventListener("mousedown", checkIfClickedOutside);
+		};
+	}, [optionsToBeViewed]);
 	const onSelect = (val) => {
 		if (multiple) {
 			if (!selectedItems.includes(val)) {
@@ -64,7 +77,7 @@ const DropDownSearch = ({ options, multiple, onSelectItem, placeholder, defaultS
 	const showDropDown = () => { };
 	
 	return (
-		<div className="dropdown-search-container">
+		<div className="dropdown-search-container" ref={ref}>
 			<div className="search">
 				<input
 					type="text"

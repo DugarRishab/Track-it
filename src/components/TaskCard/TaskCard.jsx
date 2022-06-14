@@ -110,6 +110,7 @@ const TaskCard = (props) => {
 					<ThreeDotMenu
 						options={menuOptions}
 						position="bottom-left"
+						key={task.title}
 					></ThreeDotMenu>
 				) : null}
 			</header>
