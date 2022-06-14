@@ -54,7 +54,30 @@ const TaskCard = (props) => {
 
 	let menuOptions = [];
 	if (currentUser.id === task.assignedBy.id) {
-		menuOptions = [
+		menuOptions.push({
+				title: (
+					<>
+						Edit
+						<span class="material-icons-round">edit</span>
+					</>
+				),
+				onClick: handleOnClickEdit,
+		});
+		menuOptions.push({
+			title: (
+				<>
+					Delete
+					<span class="material-icons-round">clear</span>
+				</>
+			),
+			onClick: handleOnClickDelete,
+		});
+			
+	}
+	// Array.from().i
+	// const assignedToIds = ;
+	if(task.assignedTo.map(user => user.id).includes(currentUser.id)){
+		menuOptions.push(
 			{
 				title: (
 					<>
@@ -64,25 +87,8 @@ const TaskCard = (props) => {
 				),
 				onClick: handleOnClickComplete,
 			},
-			{
-				title: (
-					<>
-						Edit
-						<span class="material-icons-round">edit</span>
-					</>
-				),
-				onClick: handleOnClickEdit,
-			},
-			{
-				title: (
-					<>
-						Delete
-						<span class="material-icons-round">clear</span>
-					</>
-				),
-				onClick: handleOnClickDelete,
-			},
-		];
+			
+		);
 	}
 
 	return (
@@ -100,10 +106,12 @@ const TaskCard = (props) => {
 						<Tag innerHtml={tag} type="dimmed"></Tag>
 					))}
 				</div>
-				<ThreeDotMenu
-					options={menuOptions}
-					position="bottom-left"
-				></ThreeDotMenu>
+				{menuOptions.length !== 0 ? (
+					<ThreeDotMenu
+						options={menuOptions}
+						position="bottom-left"
+					></ThreeDotMenu>
+				) : null}
 			</header>
 			{task.team ? <p className="team-name">{task.team.name}</p> : null}
 			<div className="title">

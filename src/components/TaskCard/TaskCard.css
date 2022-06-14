@@ -20,6 +20,7 @@
 	margin: 10px 0;
 	border-radius: 20px;
 	background-color: var(--bg);
+	width: 100%;
 }
 .task-card-container .tag{
 	background-color: var(--bg--light) !important;
@@ -28,16 +29,18 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 }
 .task-card-container header .tags{
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
+	flex-flow: row wrap;
 }
 .task-card-container header .tag{
-	margin-right: 5px;
+	/* margin-right: 5px; */
+	margin: 0 5px 5px 0
 }
 .task-card-container .team-name{
 	font-size: 12px;
