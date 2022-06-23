@@ -23,7 +23,12 @@ const taskReducer = (state = initialState, action) => {
 				assignedToUserTasks: action.payload.assignedToUserTasks,
 			};
 		case "CREATE_TASK":
-			return { ...state };
+			
+			localStorage.setItem(
+				"updatedTask",
+				JSON.stringify(action.payload.task)
+			);
+			return { ...state, updateTask: true };
 
 		case "COMPLETE_TASK": {
 			let assignedByUserTasks = [...state.assignedByUserTasks];

@@ -85,9 +85,10 @@ const Tasks = () => {
 
 	useEffect(() => {
 		const updatedTask = JSON.parse(localStorage.getItem("updatedTask"));
-
+		console.log('update task', updateTask, updatedTask);
 		if (updatedTask && updateTask) {
 			let assignedTo = false;
+			console.log("setting updated task");
 			updatedTask.assignedTo.forEach((user) => {
 				if (user.id === currentUser.id) {
 					assignedTo = true;
